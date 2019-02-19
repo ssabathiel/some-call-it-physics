@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeCallItPhysics_2D", "SomeCallItPhysics_2D.csproj", "{3326E631-9ABD-1FD4-723B-CDE605AE278E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SomeCallItPhysics_2D.Editor", "SomeCallItPhysics_2D.Editor.csproj", "{EE77688B-172F-C6B4-2DA9-7B0852E34DEF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3326E631-9ABD-1FD4-723B-CDE605AE278E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3326E631-9ABD-1FD4-723B-CDE605AE278E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3326E631-9ABD-1FD4-723B-CDE605AE278E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3326E631-9ABD-1FD4-723B-CDE605AE278E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE77688B-172F-C6B4-2DA9-7B0852E34DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE77688B-172F-C6B4-2DA9-7B0852E34DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE77688B-172F-C6B4-2DA9-7B0852E34DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE77688B-172F-C6B4-2DA9-7B0852E34DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
