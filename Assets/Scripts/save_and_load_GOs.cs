@@ -26,6 +26,9 @@ public class save_and_load_GOs : MonoBehaviour
     void Start()
     {
 
+
+
+
         // From Objects to Json
         json = CurrentScene2Json();
         string path = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\test_state.txt";
@@ -38,6 +41,13 @@ public class save_and_load_GOs : MonoBehaviour
 
         // Load Objects to game
         //LoadObjectsIntoGame(path);
+
+
+
+
+
+
+
 
     }
 

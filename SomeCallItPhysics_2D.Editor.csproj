@@ -322,6 +322,7 @@
     <Compile Include="Assets\3rd-Party\TEXDraw\Core\Editor\TEXSharedEditor.cs" />
     <Compile Include="Assets\3rd-Party\TEXDraw\Core\Editor\TEXSupplementEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Foldable_Window.cs" />
+    <Compile Include="Assets\Scripts\Editor\ObjectBuilderEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\save_and_load_GOs_editor.cs" />
   </ItemGroup>
   <ItemGroup>

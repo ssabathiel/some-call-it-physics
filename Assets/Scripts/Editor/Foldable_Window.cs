@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 public class Foldable_Window : EditorWindow
 {
@@ -29,6 +30,9 @@ public class Foldable_Window : EditorWindow
 
 
 
+
+
+
     [MenuItem("MyTools/Foldout Usage")]
     static void Init()
     {
@@ -47,10 +51,23 @@ public class Foldable_Window : EditorWindow
 
 
 
+
+
+
+
+
+
+
     }
 
     public void OnGUI()
     {
+
+
+ 
+
+
+
 
 
         selectedSize = EditorGUILayout.IntPopup("Resize Scale: ", selectedSize, names, sizes);

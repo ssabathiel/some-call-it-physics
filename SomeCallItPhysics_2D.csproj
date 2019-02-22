@@ -408,7 +408,9 @@
     <Compile Include="Assets\3rd-Party\TEXDraw\Script\TEXDraw3D.cs" />
     <Compile Include="Assets\3rd-Party\TEXDraw\Script\TEXLink.cs" />
     <Compile Include="Assets\3rd-Party\TEXDraw\Script\TEXLinkBase.cs" />
+    <Compile Include="Assets\FSM_interface.cs" />
     <Compile Include="Assets\Get_position.cs" />
+    <Compile Include="Assets\ObjectBuilderScript.cs" />
     <Compile Include="Assets\Save_positions.cs" />
     <Compile Include="Assets\Scripts\save_and_load_GOs.cs" />
   </ItemGroup>
