@@ -144,6 +144,10 @@ public class ObjectBuilderEditor : Editor
 
 
 
+    public void ShiftDownAfterDestroy()
+    {
+        Debug.Log("Should shift down here ");
+    }
 
 
 
