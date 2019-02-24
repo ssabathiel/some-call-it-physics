@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4025216813143666}
   - component: {fileID: 114112423935439122}
   m_Layer: 0
-  m_Name: state_00000100000
+  m_Name: state_prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

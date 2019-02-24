@@ -39,6 +39,13 @@ public class ObjectBuilderEditor : Editor
             Debug.Log("Name: " + obj.name);
         }
 
+        if (GUILayout.Button("Restructure state names"))
+        {
+            GameObject statess = GameObject.Find("@state_data");
+            int state_i = 0;
+            RenameStates1toN(statess, ref state_i);
+        }
+        
 
         if (GUILayout.Button("New State"))
         {
@@ -124,6 +131,36 @@ public class ObjectBuilderEditor : Editor
         }
 
     }
+
+
+
+    public static void RenameStates1toN(GameObject statess, ref int state_i_)
+    {
+        //https://gist.github.com/AShim3D/d76e2026c5655b3b34e2
+
+        //foreach (Transform child in sel_state_parent)
+
+        int initial_i = 00000100000;
+        int num_of_digits = 11;
+
+        foreach (Transform child1 in statess.transform)
+        {
+            GameObject obj = child1.gameObject;
+            int curr_i = initial_i + state_i_;
+            obj.name = "state_" + curr_i.ToString(new String('0', num_of_digits));
+
+            state_i_++;
+            RenameStates1toN(obj, ref state_i_);
+
+            
+        }
+
+        
+
+    }
+
+
+
 
 
     //https://answers.unity.com/questions/287497/how-to-subscribe-onto-hierarchy-change-event-when.html
