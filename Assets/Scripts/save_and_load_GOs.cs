@@ -11,7 +11,7 @@ public class save_and_load_GOs : MonoBehaviour
 {
     string json;
     GameObjectInScene gameObjectInScene;
-    public List<GameObjectInScene> gameObjectList;
+    
     public GameObjectList gameObjectList_new;
     public bool save = true;
 
@@ -19,7 +19,7 @@ public class save_and_load_GOs : MonoBehaviour
 
     void Awake()
     {
-        gameObjectList = new List<GameObjectInScene>();
+        //gameObjectList = new List<GameObjectInScene>();
         gameObjectList_new = new GameObjectList();
     }
 
@@ -52,6 +52,13 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
     
+    public void SaveCurrentScene2File(string path)
+    {
+        string json = CurrentScene2Json();
+        System.IO.File.WriteAllText(path, json);
+    }
+
+
     public static void own_GameObject2UnityGameObject(GameObjectInScene own_GO, GameObject GO)
     {
 
@@ -115,9 +122,10 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
 
-    string CurrentScene2Json()
+    static string CurrentScene2Json()
     {
         string json;
+        List<GameObjectInScene> gameObjectList = new List<GameObjectInScene>();
         json = "hello";
         GameObject Protagonists = GameObject.Find("Protagonists");
 
@@ -126,7 +134,7 @@ public class save_and_load_GOs : MonoBehaviour
         //foreach (Transform gObject in GameObject.Find("sheep") );
         //foreach (GameObject gObject in GameObject.FindObjectsOfType<GameObject>())
         {
-            gameObjectInScene = new GameObjectInScene(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
+            GameObjectInScene gameObjectInScene = new GameObjectInScene(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
             gameObjectList.Add(gameObjectInScene);
 
 

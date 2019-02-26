@@ -34,7 +34,7 @@ public class FSM_naming_manager : MonoBehaviour
             }
         }
       
-        SortChildrenByName();
+        SortChildrenByName(sel_state);
 
     }
 
@@ -66,27 +66,29 @@ public class FSM_naming_manager : MonoBehaviour
 
 
 
-    public static void SortChildrenByName()
+    public static void SortChildrenByName(GameObject go)
     {
         //https://gist.github.com/AShim3D/d76e2026c5655b3b34e2
-
-        GameObject statess = GameObject.Find("@state_data");
-        foreach (Transform child1 in statess.transform)
+        //Debug.Log("Here to sort");
+        //foreach (Transform child in sel_state_parent)
+        Transform statess = go.transform.parent;
+        //foreach (Transform child1 in statess.transform)
+        //{
+        //GameObject obj = child1.gameObject;
+        GameObject obj = statess.gameObject;
+        List<Transform> children = new List<Transform>();
+        for (int i = obj.transform.childCount - 1; i >= 0; i--)
         {
-            GameObject obj = child1.gameObject;
-            List<Transform> children = new List<Transform>();
-            for (int i = obj.transform.childCount - 1; i >= 0; i--)
-            {
-                Transform child = obj.transform.GetChild(i);
-                children.Add(child);
-                child.parent = null;
-            }
-            children.Sort((Transform t1, Transform t2) => { return t1.name.CompareTo(t2.name); });
-            foreach (Transform child in children)
-            {
-                child.parent = obj.transform;
-            }
+            Transform child = obj.transform.GetChild(i);
+            children.Add(child);
+            child.parent = null;
         }
+        children.Sort((Transform t1, Transform t2) => { return t1.name.CompareTo(t2.name); });
+        foreach (Transform child in children)
+        {
+            child.parent = obj.transform;
+        }
+        //}
 
     }
 

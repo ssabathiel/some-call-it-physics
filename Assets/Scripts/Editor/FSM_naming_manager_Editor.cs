@@ -30,43 +30,100 @@ public class FSM_naming_manager_Editor : Editor
         }
         
 
-        if (GUILayout.Button("New State"))
+        if (GUILayout.Button("Add Current Scene"))
         {
-            int num_of_digits = 11;
-            GameObject sel_state = Selection.activeGameObject;
-            int sel_state_number = getStateNumber(sel_state);
 
-            Transform sel_state_parent = sel_state.transform.parent;
+            string next_state_string = "";
+            AddState(ref next_state_string);
 
-            //When state inbetween states is created, all statenames larger then that must be increased
-            GameObject statess = GameObject.Find("@state_data");
-            int nextSiblingNumber_var = GetNextSiblingNumber(sel_state);
-            Debug.Log("sel_state_number " + sel_state_number);
-            Debug.Log("nextSiblingNumber_var " + nextSiblingNumber_var);
-            ShiftUpcomingNames(statess, nextSiblingNumber_var);
-
-            //Create new object with prefab (added script as component)
-            string prefab_path = "Prefabs/state_prefab";
-            GameObject prefab = (GameObject)Resources.Load(prefab_path);
-            GameObject newObject1 = (GameObject)Instantiate(prefab);
-
-            // Now new state can be renamed
-            nextSiblingNumber_var += 1;
-            string next_state_string = "state_" + nextSiblingNumber_var.ToString(new String('0', num_of_digits)); 
-            newObject1.name = next_state_string;
-
-            // Put new state in the right level in the hierarchy (same as selected state)
-            newObject1.transform.parent = sel_state.transform.parent;
-
-            SortChildrenByName(sel_state);
+            //Save current scene to corresponding file name
+            GameObject go = GameObject.Find("@state_scripts");
+            save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+            string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + next_state_string;
+            myscript.SaveCurrentScene2File(pathy);
 
 
 
         }
 
 
+        if (GUILayout.Button("Copy state"))
+        {
+
+            string next_state_string = "";
+            AddState(ref next_state_string);
+
+            GameObject sel_state = Selection.activeGameObject;
+
+            Debug.Log("next_state_string " + next_state_string);
+            Debug.Log("sel_state.name " + sel_state.name);
+
+
+            //Copy File
+            string sourcefileName = sel_state.name;
+            string targetfileName = next_state_string;
+            string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
+            string targetPath = sourcePath;
+
+            // Use Path class to manipulate file and directory paths.
+            string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
+            string destFile = System.IO.Path.Combine(targetPath, targetfileName);
+
+            System.IO.File.Copy(sourceFile, destFile, true);
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
-    
+
+
+
+    public static void AddState(ref string added_file_path)
+    {
+        int num_of_digits = 11;
+        GameObject sel_state = Selection.activeGameObject;
+
+        Transform sel_state_parent = sel_state.transform.parent;
+
+        //When state inbetween states is created, all statenames larger then that must be increased
+        GameObject statess = GameObject.Find("@state_data");
+        int nextSiblingNumber_var = GetNextSiblingNumber(sel_state);
+
+        ShiftUpcomingNames(statess, nextSiblingNumber_var);
+        IntermediateFiles2Files(statess, nextSiblingNumber_var);
+
+        //Create new object with prefab (added script as component)
+        string prefab_path = "Prefabs/state_prefab";
+        GameObject prefab = (GameObject)Resources.Load(prefab_path);
+        GameObject newObject1 = (GameObject)Instantiate(prefab);
+
+        // Now new state can be renamed
+        nextSiblingNumber_var += 1;
+        string next_state_string = "state_" + nextSiblingNumber_var.ToString(new String('0', num_of_digits));
+        newObject1.name = next_state_string;
+
+        // Put new state in the right level in the hierarchy (same as selected state)
+        newObject1.transform.parent = sel_state.transform.parent;
+
+        SortChildrenByName(sel_state);
+
+        added_file_path = next_state_string;
+
+    }
+
 
     public static string nextStateString(string stateName)
     {
@@ -139,12 +196,56 @@ public class FSM_naming_manager_Editor : Editor
             int stateNumber = getStateNumber(child.gameObject);
             if (stateNumber > sel_state_number)
             {
+                string sourcefileName = child.gameObject.name;
                 child.gameObject.name = nextStateString(child.gameObject.name);
+
+
+                string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
+                string targetPath = sourcePath;
+                string targetfileName = nextStateString(child.gameObject.name) + "_";
+
+                string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
+                string destFile = System.IO.Path.Combine(targetPath, targetfileName);
+                System.IO.File.Copy(sourceFile, destFile); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
             }
 
             ShiftUpcomingNames(child.gameObject, sel_state_number);
         }
+
+
     }
+
+
+
+    public static void IntermediateFiles2Files(GameObject go, int sel_state_number)
+    {
+        foreach (Transform child in go.transform)
+        {
+            int stateNumber = getStateNumber(child.gameObject);
+            if (stateNumber > sel_state_number)
+            {
+                string sourcefileName = child.gameObject.name + "_";
+
+
+
+                string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
+                string targetPath = sourcePath;
+                string targetfileName = child.gameObject.name;
+
+                string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
+                string destFile = System.IO.Path.Combine(targetPath, targetfileName);
+                System.IO.File.Copy(sourceFile, destFile); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
+                System.IO.File.Delete(sourceFile);
+            }
+
+            ShiftUpcomingNames(child.gameObject, sel_state_number);
+        }
+
+
+    }
+
+
+
 
     public static void RenameStates1toN(GameObject statess, ref int state_i_)
     {
