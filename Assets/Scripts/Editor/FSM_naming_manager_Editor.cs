@@ -6,38 +6,21 @@ using System.Collections.Generic;
 
 
 
-[CustomEditor(typeof(ObjectBuilderScript))]
-public class ObjectBuilderEditor : Editor
+[CustomEditor(typeof(FSM_naming_manager))]
+public class FSM_naming_manager_Editor : Editor
 {
 
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
 
-        ObjectBuilderScript myScript = (ObjectBuilderScript)target;
+        FSM_naming_manager myScript = (FSM_naming_manager)target;
         if (GUILayout.Button("Build Object"))
         {
             myScript.BuildObject();
         }
 
 
-        if (GUILayout.Button("Initialize Buttons"))
-        {
-            GameObject statess = GameObject.Find("@state_data");
-            foreach (Transform child in statess.transform)
-            {
-                child.gameObject.AddComponent<ObjectBuilderScript>();
-            }
-        }
-
-
-
-
-        if (GUILayout.Button("Get Name of selected object"))
-        {
-            GameObject obj = Selection.activeGameObject;
-            Debug.Log("Name: " + obj.name);
-        }
 
         if (GUILayout.Button("Restructure state names"))
         {
@@ -49,42 +32,43 @@ public class ObjectBuilderEditor : Editor
 
         if (GUILayout.Button("New State"))
         {
+            int num_of_digits = 11;
             GameObject sel_state = Selection.activeGameObject;
-
-            string next_state_string = nextStateString(sel_state.name);
+            int sel_state_number = getStateNumber(sel_state);
 
             Transform sel_state_parent = sel_state.transform.parent;
 
-            int sel_state_number = getStateNumber(sel_state);
- 
+            //When state inbetween states is created, all statenames larger then that must be increased
+            GameObject statess = GameObject.Find("@state_data");
+            int nextSiblingNumber_var = GetNextSiblingNumber(sel_state);
+            Debug.Log("sel_state_number " + sel_state_number);
+            Debug.Log("nextSiblingNumber_var " + nextSiblingNumber_var);
+            ShiftUpcomingNames(statess, nextSiblingNumber_var);
 
-
-            foreach (Transform child in sel_state_parent)
-            {
-                int stateNumber = getStateNumber(child.gameObject);
-                if (stateNumber > sel_state_number)
-                {
-                    child.gameObject.name = nextStateString(child.gameObject.name);
-                }
-            }
-
+            //Create new object with prefab (added script as component)
             string prefab_path = "Prefabs/state_prefab";
             GameObject prefab = (GameObject)Resources.Load(prefab_path);
             GameObject newObject1 = (GameObject)Instantiate(prefab);
+
+            // Now new state can be renamed
+            nextSiblingNumber_var += 1;
+            string next_state_string = "state_" + nextSiblingNumber_var.ToString(new String('0', num_of_digits)); 
             newObject1.name = next_state_string;
 
-            //GameObject sel_state_parent = sel_state.transform.parent;
+            // Put new state in the right level in the hierarchy (same as selected state)
             newObject1.transform.parent = sel_state.transform.parent;
 
-            SortChildrenByName();
+            SortChildrenByName(sel_state);
+
+
 
         }
 
 
     }
+    
 
-
-    public string nextStateString(string stateName)
+    public static string nextStateString(string stateName)
     {
         int num_of_digits = 11;
         string nextStateName;
@@ -96,7 +80,8 @@ public class ObjectBuilderEditor : Editor
         return nextStateName;
     }
 
-    public int getStateNumber(GameObject state)
+    
+    public static int getStateNumber(GameObject state)
     {
         int num_of_digits = 11;
         string stateName = state.name.Substring(state.name.Length - num_of_digits);
@@ -104,18 +89,20 @@ public class ObjectBuilderEditor : Editor
 
         return stateNumber;
     }
+    
 
 
 
-    public static void SortChildrenByName()
+    public static void SortChildrenByName(GameObject go)
     {
         //https://gist.github.com/AShim3D/d76e2026c5655b3b34e2
-
+        //Debug.Log("Here to sort");
         //foreach (Transform child in sel_state_parent)
-        GameObject statess = GameObject.Find("@state_data");
-        foreach (Transform child1 in statess.transform)
-        {
-            GameObject obj = child1.gameObject;
+        Transform statess = go.transform.parent;
+        //foreach (Transform child1 in statess.transform)
+        //{
+        //GameObject obj = child1.gameObject;
+        GameObject obj = statess.gameObject;
             List<Transform> children = new List<Transform>();
             for (int i = obj.transform.childCount - 1; i >= 0; i--)
             {
@@ -128,11 +115,36 @@ public class ObjectBuilderEditor : Editor
             {
                 child.parent = obj.transform;
             }
-        }
+        //}
 
     }
 
 
+    public static int GetNextSiblingNumber(GameObject go)
+    {
+        int stateNumber = getStateNumber(go);
+        int nextSiblingNumber = stateNumber;
+        foreach(Transform child in go.transform)
+        {
+            nextSiblingNumber = getStateNumber(child.gameObject);
+        }
+
+        return nextSiblingNumber;
+    }
+
+    public static void ShiftUpcomingNames(GameObject go, int sel_state_number)
+    {
+        foreach (Transform child in go.transform)
+        {
+            int stateNumber = getStateNumber(child.gameObject);
+            if (stateNumber > sel_state_number)
+            {
+                child.gameObject.name = nextStateString(child.gameObject.name);
+            }
+
+            ShiftUpcomingNames(child.gameObject, sel_state_number);
+        }
+    }
 
     public static void RenameStates1toN(GameObject statess, ref int state_i_)
     {
@@ -162,7 +174,7 @@ public class ObjectBuilderEditor : Editor
 
 
 
-
+    /*
     //https://answers.unity.com/questions/287497/how-to-subscribe-onto-hierarchy-change-event-when.html
     void OnEnable()
     {
@@ -178,7 +190,7 @@ public class ObjectBuilderEditor : Editor
     {
         SortChildrenByName();
     }
-
+    */
 
 
     public void ShiftDownAfterDestroy()
@@ -192,23 +204,5 @@ public class ObjectBuilderEditor : Editor
 
 
 
-/*
-public class ObjectChecker : MonoBehavior
-{
-    //Nothing needed here
-}
 
- 
-[CustomEditor(typeof(ObjectChecker))]
-public class ObjectChecker : Editor
-{
-    public void OnDestroy()
-    {
-        if (((ObjectChecker)target) == null)
-        {
-            Debug.Log("Element destroyed");
-        }
-    }
-}
-*/
 

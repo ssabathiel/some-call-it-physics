@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 
 [ExecuteInEditMode()]
-public class ObjectBuilderScript : MonoBehaviour
+public class FSM_naming_manager : MonoBehaviour
 {
     public GameObject obj;
     public Vector3 spawnPoint;
@@ -18,21 +18,12 @@ public class ObjectBuilderScript : MonoBehaviour
 
     void OnDestroy()
     {
-        Debug.Log("Sth has been destroyed " + this.gameObject.name);
-
-
-        ///////////////////////////////////
-        ///
+        //Debug.Log("Sth has been destroyed " + this.gameObject.name);
 
 
         GameObject sel_state = this.gameObject;
-
-
         Transform sel_state_parent = sel_state.transform.parent;
-
         int sel_state_number = getStateNumber(sel_state);
-
-
 
         foreach (Transform child in sel_state_parent)
         {
@@ -42,22 +33,10 @@ public class ObjectBuilderScript : MonoBehaviour
                 child.gameObject.name = prevStateString(child.gameObject.name);
             }
         }
-
-        
-
+      
         SortChildrenByName();
 
-
-
-
-
-        /////////////////////////////////////////////////////////////////////////
-
-        //GameObject obj = Selection.activeGameObject;
-        //Debug.Log("Name: " + obj.name);
     }
-
-
 
 
 
@@ -71,9 +50,10 @@ public class ObjectBuilderScript : MonoBehaviour
         int x = Convert.ToInt32(nextStateName);
         x -= 1;
         nextStateName = "state_" + x.ToString(new String('0', num_of_digits));
-        //State_000010000
         return nextStateName;
     }
+
+
 
     public int getStateNumber(GameObject state)
     {
@@ -90,7 +70,6 @@ public class ObjectBuilderScript : MonoBehaviour
     {
         //https://gist.github.com/AShim3D/d76e2026c5655b3b34e2
 
-        //foreach (Transform child in sel_state_parent)
         GameObject statess = GameObject.Find("@state_data");
         foreach (Transform child1 in statess.transform)
         {
@@ -110,15 +89,6 @@ public class ObjectBuilderScript : MonoBehaviour
         }
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
