@@ -61,11 +61,12 @@ public class save_and_load_GOs : MonoBehaviour
 
     public static void own_GameObject2UnityGameObject(GameObjectInScene own_GO, GameObject GO)
     {
-
+        GameObject parenty = GameObject.Find("Protagonists");
         GO.name = own_GO.name;
         GO.transform.localScale = own_GO.scale;
         GO.transform.position = own_GO.position;
         GO.transform.rotation = own_GO.rotation;
+        GO.transform.parent = parenty.transform;
     }
     
 
@@ -92,10 +93,9 @@ public class save_and_load_GOs : MonoBehaviour
 
             
 
-
             json = JsonUtility.ToJson(gObject, true);
             //string prefab_path = "Prefabs/" + gObject.name;
-            string prefab_path = "Prefabs/sheep";
+            string prefab_path = "Prefabs/" + gObject.name;
             GameObject prefab = (GameObject)Resources.Load(prefab_path);
             Debug.Log("prefab_path: " + prefab_path);
             GameObject newObject1 = (GameObject)Instantiate(prefab);

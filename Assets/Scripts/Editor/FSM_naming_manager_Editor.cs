@@ -27,6 +27,7 @@ public class FSM_naming_manager_Editor : Editor
             GameObject statess = GameObject.Find("@state_data");
             int state_i = 0;
             RenameStates1toN(statess, ref state_i);
+            IntermediateFiles2Files(statess, state_i);
         }
         
 
@@ -76,6 +77,37 @@ public class FSM_naming_manager_Editor : Editor
 
 
 
+        if (GUILayout.Button("Load Scene"))
+        {
+
+            GameObject sel_state = Selection.activeGameObject;
+
+            //Save current scene to corresponding file name
+            GameObject go = GameObject.Find("@state_scripts");
+            save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+            string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + sel_state.name;
+
+            // Destroy whole previous scene before
+            GameObject parenty = GameObject.Find("Protagonists");
+            var tempArray = new GameObject[parenty.transform.childCount];
+
+            for (int i = 0; i < tempArray.Length; i++)
+            {
+                tempArray[i] = parenty.transform.GetChild(i).gameObject;
+            }
+
+            foreach (var child in tempArray)
+            {
+                DestroyImmediate(child);
+            }
+            myscript.LoadObjectsIntoGame(pathy);
+
+
+
+        }
+
+
+
 
 
 
@@ -102,8 +134,10 @@ public class FSM_naming_manager_Editor : Editor
         GameObject statess = GameObject.Find("@state_data");
         int nextSiblingNumber_var = GetNextSiblingNumber(sel_state);
 
+        
         ShiftUpcomingNames(statess, nextSiblingNumber_var);
         IntermediateFiles2Files(statess, nextSiblingNumber_var);
+
 
         //Create new object with prefab (added script as component)
         string prefab_path = "Prefabs/state_prefab";
@@ -202,11 +236,11 @@ public class FSM_naming_manager_Editor : Editor
 
                 string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
                 string targetPath = sourcePath;
-                string targetfileName = nextStateString(child.gameObject.name) + "_";
+                string targetfileName = nextStateString(sourcefileName) + "_";
 
                 string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
                 string destFile = System.IO.Path.Combine(targetPath, targetfileName);
-                System.IO.File.Copy(sourceFile, destFile); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
+                System.IO.File.Copy(sourceFile, destFile, true); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
             }
 
             ShiftUpcomingNames(child.gameObject, sel_state_number);
@@ -219,6 +253,10 @@ public class FSM_naming_manager_Editor : Editor
 
     public static void IntermediateFiles2Files(GameObject go, int sel_state_number)
     {
+
+        //int initial_i = 00000100000;
+        //int num_of_digits = 11;
+
         foreach (Transform child in go.transform)
         {
             int stateNumber = getStateNumber(child.gameObject);
@@ -234,11 +272,11 @@ public class FSM_naming_manager_Editor : Editor
 
                 string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
                 string destFile = System.IO.Path.Combine(targetPath, targetfileName);
-                System.IO.File.Copy(sourceFile, destFile); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
+                System.IO.File.Copy(sourceFile, destFile, true); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
                 System.IO.File.Delete(sourceFile);
             }
 
-            ShiftUpcomingNames(child.gameObject, sel_state_number);
+            IntermediateFiles2Files(child.gameObject, sel_state_number);
         }
 
 
@@ -259,8 +297,24 @@ public class FSM_naming_manager_Editor : Editor
         foreach (Transform child1 in statess.transform)
         {
             GameObject obj = child1.gameObject;
+            string sourcefileName = obj.name;
+
             int curr_i = initial_i + state_i_;
             obj.name = "state_" + curr_i.ToString(new String('0', num_of_digits));
+
+
+
+            // FILE management
+            
+            string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
+            string targetPath = sourcePath;
+            string targetfileName = obj.name;
+
+            string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
+            string destFile = System.IO.Path.Combine(targetPath, targetfileName);
+            System.IO.File.Copy(sourceFile, destFile, true); // Copy, since Move does not work on networks: see stackoverfl: "Rename a file in C#"
+            System.IO.File.Delete(sourceFile);
+
 
             state_i_++;
             RenameStates1toN(obj, ref state_i_);
