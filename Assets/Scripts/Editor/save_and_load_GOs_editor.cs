@@ -9,15 +9,10 @@ using UnityEditor;
 //[CustomEditor(typeof(save_and_load_GOs))]
 public class save_and_load_GOs_editor : MonoBehaviour {
 
-
-
-
     // Use this for initialization
     void Start()
     {
-
         LoadObjectsIntoGame_editor();
-
     }
 	
 	// Update is called once per frame
@@ -26,12 +21,9 @@ public class save_and_load_GOs_editor : MonoBehaviour {
 	}
 
 
-
-
     [MenuItem("MyTools/CreateGameObjects2")]
     static void LoadObjectsIntoGame_editor()
     {
-
         GameObject go = GameObject.Find("@state_scripts");
         save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
         string path = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\test_state.txt";
@@ -46,13 +38,10 @@ public class save_and_load_GOs_editor : MonoBehaviour {
         {
             string prefab_path = "Prefabs/sheep";
             GameObject prefab = (GameObject)Resources.Load(prefab_path);
-            //Debug.Log("prefab_path: " + prefab_path);
             GameObject go = (GameObject)Instantiate(prefab);
             go.transform.position = new Vector3(x, 0, 0);
         }
     }
-
-
 
 }
 

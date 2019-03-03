@@ -88,6 +88,7 @@ public class FSM_naming_manager_Editor : Editor
             string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + sel_state.name;
 
             // Destroy whole previous scene before
+            // https://stackoverflow.com/questions/38120084/how-can-we-destroy-child-objects-in-edit-modeunity3d
             GameObject parenty = GameObject.Find("Protagonists");
             var tempArray = new GameObject[parenty.transform.childCount];
 
@@ -105,16 +106,6 @@ public class FSM_naming_manager_Editor : Editor
 
 
         }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -137,7 +128,6 @@ public class FSM_naming_manager_Editor : Editor
         
         ShiftUpcomingNames(statess, nextSiblingNumber_var);
         IntermediateFiles2Files(statess, nextSiblingNumber_var);
-
 
         //Create new object with prefab (added script as component)
         string prefab_path = "Prefabs/state_prefab";
@@ -263,9 +253,6 @@ public class FSM_naming_manager_Editor : Editor
             if (stateNumber > sel_state_number)
             {
                 string sourcefileName = child.gameObject.name + "_";
-
-
-
                 string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
                 string targetPath = sourcePath;
                 string targetfileName = child.gameObject.name;
@@ -289,8 +276,6 @@ public class FSM_naming_manager_Editor : Editor
     {
         //https://gist.github.com/AShim3D/d76e2026c5655b3b34e2
 
-        //foreach (Transform child in sel_state_parent)
-
         int initial_i = 00000100000;
         int num_of_digits = 11;
 
@@ -301,8 +286,6 @@ public class FSM_naming_manager_Editor : Editor
 
             int curr_i = initial_i + state_i_;
             obj.name = "state_" + curr_i.ToString(new String('0', num_of_digits));
-
-
 
             // FILE management
             
@@ -326,26 +309,6 @@ public class FSM_naming_manager_Editor : Editor
 
     }
 
-
-
-
-    /*
-    //https://answers.unity.com/questions/287497/how-to-subscribe-onto-hierarchy-change-event-when.html
-    void OnEnable()
-    {
-        EditorApplication.hierarchyWindowChanged += HierarchyChanged;
-    }
-
-    void OnDisable()
-    {
-        EditorApplication.hierarchyWindowChanged -= HierarchyChanged;
-    }
-
-    private void HierarchyChanged()
-    {
-        SortChildrenByName();
-    }
-    */
 
 
     public void ShiftDownAfterDestroy()
