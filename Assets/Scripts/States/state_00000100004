@@ -1,7 +1,7 @@
 {
-    "Listy": [
+    "GameObjectList": [
         {
-            "name": "sheep (2)",
+            "name": "sheep",
             "scale": {
                 "x": 1.6235405206680298,
                 "y": 1.5412684679031373,
@@ -17,18 +17,30 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
-            "name": "sheep (1)",
+            "name": "sheep",
             "scale": {
                 "x": 1.6235405206680298,
                 "y": 1.5412684679031373,
                 "z": 1.0
             },
             "position": {
-                "x": 13.69999885559082,
-                "y": 3.5999999046325685,
+                "x": 22.72881507873535,
+                "y": 4.967950344085693,
                 "z": -1.83984375
             },
             "rotation": {
@@ -36,7 +48,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "sheep",
@@ -55,10 +79,22 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
-            "name": "ingenous (2)",
+            "name": "ingenous",
             "scale": {
                 "x": 1.0,
                 "y": 1.0,
@@ -74,10 +110,22 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
-            "name": "ingenous (1)",
+            "name": "ingenous",
             "scale": {
                 "x": 1.0,
                 "y": 1.0,
@@ -93,7 +141,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "ingenous",
@@ -112,7 +172,47 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         }
-    ]
+    ],
+    "sceneSettings": {
+        "camera_pos": {
+            "x": 2.3299999237060549,
+            "y": 0.8299999833106995,
+            "z": -14.949999809265137
+        },
+        "camera_rot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "camera_fieldOfView": 0.0,
+        "skybox": {
+            "instanceID": 11878
+        },
+        "light": {
+            "instanceID": 0
+        },
+        "dummy_comp1": "",
+        "dummy_comp2": "",
+        "dummy_comp3": "",
+        "dummy_comp4": 0,
+        "dummy_comp5": 0,
+        "dummy_comp6": 0,
+        "dummy_comp7": 0.0,
+        "dummy_comp8": 0.0,
+        "dummy_comp9": 0.0
+    }
 }

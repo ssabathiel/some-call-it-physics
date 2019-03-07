@@ -8,25 +8,14 @@ using System;
 public class save_and_load_GOs : MonoBehaviour
 {
 
-
-    GameObjectInScene gameObjectInScene;    
-    public GameObjectList gameObjectList_new;
-    public bool save = true;
-
-
-
     void Awake()
     {
-        //gameObjectList = new List<GameObjectInScene>();
-        gameObjectList_new = new GameObjectList();
     }
 
     void Start()
     {
-
-
+        
     }
-
 
 
     ///////////////////////////////
@@ -36,21 +25,33 @@ public class save_and_load_GOs : MonoBehaviour
     {
         string json = CurrentScene2Json();
         System.IO.File.WriteAllText(path, json);
+        Debug.Log("RenderSettings.skybox " + RenderSettings.skybox.name);
     }
 
     static string CurrentScene2Json()
     {
 
-        // Save current Gameobjects
-        List<GameObjectInScene> gameObjectList = new List<GameObjectInScene>();
+        // Get current Gameobjects
+        List<OwnGameObjectClass> gameObjectList = new List<OwnGameObjectClass>();
         GameObject Protagonists = GameObject.Find("Protagonists");
         foreach (Transform gObject in Protagonists.transform)
         {
-            GameObjectInScene gameObjectInScene = new GameObjectInScene(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
+            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
             gameObjectList.Add(gameObjectInScene);
 
         }
-        var ser_able_obj_list = new GameObjectList() { Listy = gameObjectList };
+        // Get current Scene-settings
+        GameObject cam = GameObject.Find("Main Camera");
+        GameObject skybox = GameObject.Find("Skybox");
+        GameObject lighty = GameObject.Find("Main Light");
+
+        Material mat = RenderSettings.skybox;
+        
+        
+        SceneSettings sceneSettings_ = new SceneSettings(cam, mat);
+
+
+        var ser_able_obj_list = new SceneData() { GameObjectList = gameObjectList, sceneSettings = sceneSettings_ };
         string json = JsonUtility.ToJson(ser_able_obj_list, true);
 
         return json;
@@ -64,11 +65,36 @@ public class save_and_load_GOs : MonoBehaviour
     ///////////////////////////////
     /// LOAD-SCENE METHODS    
     ///////////////////////////////
+    ///
+
+    public void LoadSceneIntoGame(string path)
+    {
+        SceneData sceneData = GetSceneDataFromJsonFile(path);
+        foreach (OwnGameObjectClass gObject in sceneData.GameObjectList)
+        {
+            string prefab_path = "Prefabs/" + gObject.name;
+            GameObject prefab = (GameObject)Resources.Load(prefab_path);
+            GameObject newObject1 = (GameObject)Instantiate(prefab);
+            own_GameObject2UnityGameObject(gObject, newObject1);
+        }
+
+        //// Load SceneSettings: Camera and Skybox
+        // Camera
+        GameObject cam = GameObject.Find("Main Camera");
+        cam.transform.position = sceneData.sceneSettings.camera_pos;
+        cam.transform.eulerAngles = sceneData.sceneSettings.camera_rot;
+        //Skybox
+        //RenderSettings.skybox = ...path + sceneData.sceneSettings.skybox_name... ;
+        //RenderSettings.skybox.SetMatrix("_Rotation", sceneData.sceneSettings.skybox_rot) ;
+
+
+
+    }
 
     public void LoadObjectsIntoGame(string path)
     {
-        gameObjectList_new = GetObjectsFromJsonFile(path);
-        foreach (GameObjectInScene gObject in gameObjectList_new.Listy)
+        SceneData sceneData = GetSceneDataFromJsonFile(path);
+        foreach (OwnGameObjectClass gObject in sceneData.GameObjectList)
         {
             string prefab_path = "Prefabs/" + gObject.name;
             GameObject prefab = (GameObject)Resources.Load(prefab_path);
@@ -79,20 +105,20 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
 
-    GameObjectList GetObjectsFromJsonFile(string path)
+    SceneData GetSceneDataFromJsonFile(string path)
     {
-        GameObjectList gameObjectList_new;
+        SceneData sceneData;
         using (StreamReader r = new StreamReader(path))
         {
             string json_new = r.ReadToEnd();
-            gameObjectList_new = JsonUtility.FromJson<GameObjectList>(json_new);
+            sceneData = JsonUtility.FromJson<SceneData>(json_new);
         }
 
-        return gameObjectList_new;
+        return sceneData;
     }
 
 
-    public static void own_GameObject2UnityGameObject(GameObjectInScene own_GO, GameObject GO)
+    public static void own_GameObject2UnityGameObject(OwnGameObjectClass own_GO, GameObject GO)
     {
         GameObject parenty = GameObject.Find("Protagonists");
         GO.name = own_GO.name;
@@ -112,9 +138,20 @@ public class save_and_load_GOs : MonoBehaviour
 ///////////////////////////////
 /// OWN CLASSES     
 ///////////////////////////////
+///
+
 
 [Serializable]
-public class GameObjectInScene
+public class SceneData
+{
+    public List<OwnGameObjectClass> GameObjectList;
+    public SceneSettings sceneSettings;
+}
+
+
+
+[Serializable]
+public class OwnGameObjectClass
 {
     public string name;
     public Vector3 scale;
@@ -138,7 +175,7 @@ public class GameObjectInScene
     public bool dummy_component6;
 
 
-    public GameObjectInScene(string name, Vector3 scale, Vector3 position, Quaternion rotation)
+    public OwnGameObjectClass(string name, Vector3 scale, Vector3 position, Quaternion rotation)
     {
         this.name = name;
         this.scale = scale;
@@ -153,15 +190,42 @@ public class GameObjectInScene
 
 
 
-
 [Serializable]
-public class GameObjectList
+public class SceneSettings
 {
-    public List<GameObjectInScene> Listy;
+    public Vector3 camera_pos;
+    public Vector3 camera_rot;
+    public float camera_fieldOfView;
+
+    public string skybox_name;
+    public Matrix4x4 sky_box_rot;
+
+    public Light light;
+
+    public string dummy_comp1;
+    public string dummy_comp2;
+    public string dummy_comp3;
+
+    public int dummy_comp4;
+    public int dummy_comp5;
+    public int dummy_comp6;
+
+    public float dummy_comp7;
+    public float dummy_comp8;
+    public float dummy_comp9;
+
+    public SceneSettings(GameObject camera, Material skybox)
+    {
+        this.camera_pos = camera.transform.position;
+        this.camera_rot = camera.transform.eulerAngles;
+        //this.camera_fieldOfView = camera.camera.fieldOfView;
+
+        //this.skybox_name = skybox.name;
+        //this.sky_box_rot = skybox.GetMatrix("_Rotation");
+    }
+
+
 }
-
-
-
 
 
 

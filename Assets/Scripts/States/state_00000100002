@@ -1,5 +1,5 @@
 {
-    "Listy": [
+    "GameObjectList": [
         {
             "name": "sheep",
             "scale": {
@@ -17,7 +17,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "sheep",
@@ -27,8 +39,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 22.72881507873535,
-                "y": 4.967950344085693,
+                "x": 13.068815231323243,
+                "y": 4.16795015335083,
                 "z": -1.83984375
             },
             "rotation": {
@@ -36,7 +48,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "sheep",
@@ -55,7 +79,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "ingenous",
@@ -74,7 +110,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "ingenous",
@@ -93,7 +141,19 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         },
         {
             "name": "ingenous",
@@ -112,7 +172,63 @@
                 "y": 0.0,
                 "z": 0.0,
                 "w": 1.0
-            }
+            },
+            "go_ID": 0,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false
         }
-    ]
+    ],
+    "sceneSettings": {
+        "camera_pos": {
+            "x": 15.300000190734864,
+            "y": -0.4000000059604645,
+            "z": -14.949999809265137
+        },
+        "camera_rot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "camera_fieldOfView": 0.0,
+        "skybox_name": "Pink_4K_Resolution",
+        "sky_box_rot": {
+            "e00": 1.0,
+            "e01": 0.0,
+            "e02": 0.0,
+            "e03": 0.0,
+            "e10": 0.0,
+            "e11": 1.0,
+            "e12": 0.0,
+            "e13": 0.0,
+            "e20": 0.0,
+            "e21": 0.0,
+            "e22": 1.0,
+            "e23": 0.0,
+            "e30": 0.0,
+            "e31": 0.0,
+            "e32": 0.0,
+            "e33": 1.0
+        },
+        "light": {
+            "instanceID": 0
+        },
+        "dummy_comp1": "",
+        "dummy_comp2": "",
+        "dummy_comp3": "",
+        "dummy_comp4": 0,
+        "dummy_comp5": 0,
+        "dummy_comp6": 0,
+        "dummy_comp7": 0.0,
+        "dummy_comp8": 0.0,
+        "dummy_comp9": 0.0
+    }
 }

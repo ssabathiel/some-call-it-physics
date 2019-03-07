@@ -101,7 +101,7 @@ public class FSM_naming_manager_Editor : Editor
             {
                 DestroyImmediate(child);
             }
-            myscript.LoadObjectsIntoGame(pathy);
+            myscript.LoadSceneIntoGame(pathy);
 
 
 
