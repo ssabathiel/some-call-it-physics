@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System;
-
+using UnityEngine.UI;
 
 public class save_and_load_GOs : MonoBehaviour
 {
@@ -34,22 +34,51 @@ public class save_and_load_GOs : MonoBehaviour
         // Get current Gameobjects
         List<OwnGameObjectClass> gameObjectList = new List<OwnGameObjectClass>();
         GameObject Protagonists = GameObject.Find("Protagonists");
+        int lll = 0;
+        System.Random rnd = new System.Random();
+
         foreach (Transform gObject in Protagonists.transform)
         {
+            
             OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
+
+            /*
+            lll++;           
+            int rand_ID = rnd.Next(1, 100000000);
+            //InputField inputfield = gObject.gameObject.AddComponent<InputField>();
+            InputField inputfield = gObject.gameObject.GetComponent<InputField>();
+            inputfield.text = rand_ID.ToString();
+            //inputfield.SetActive(false);
+            */
+
+            /*
+            extra_go_params id_script = gObject.gameObject.AddComponent<extra_go_params>();
+            System.Random rnd = new System.Random();
+            int rand_ID = rnd.Next(1, 100000000);
+            id_script.go_ID = rand_ID;
+            gameObjectInScene.go_ID = id_script.go_ID;
+            */
+
+            //System.Random rnd = new System.Random();
+            if (gObject.gameObject.GetComponent<extra_go_params>().go_ID_ == 0 )
+            {                
+                int rand_ID = rnd.Next(1, 100000000);
+                //int go_ID = gObject.gameObject.AddComponent<int>();
+                //gObject.gameObject.go_ID = rand_ID;
+                gObject.gameObject.GetComponent<extra_go_params>().go_ID_ = rand_ID;
+            }
+            //Debug("gObject.go_ID2: " + gObject.gameObject.GetComponent<extra_go_params>().go_ID);
+            gameObjectInScene.go_ID = gObject.gameObject.GetComponent<extra_go_params>().go_ID_;
+            
+
+
             gameObjectList.Add(gameObjectInScene);
 
         }
         // Get current Scene-settings
         GameObject cam = GameObject.Find("Main Camera");
-        GameObject skybox = GameObject.Find("Skybox");
-        GameObject lighty = GameObject.Find("Main Light");
-
-        Material mat = RenderSettings.skybox;
-        
-        
+        Material mat = RenderSettings.skybox;        
         SceneSettings sceneSettings_ = new SceneSettings(cam, mat);
-
 
         var ser_able_obj_list = new SceneData() { GameObjectList = gameObjectList, sceneSettings = sceneSettings_ };
         string json = JsonUtility.ToJson(ser_able_obj_list, true);
@@ -92,6 +121,20 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
     public void LoadObjectsIntoGame(string path)
+    {
+        SceneData sceneData = GetSceneDataFromJsonFile(path);
+        foreach (OwnGameObjectClass gObject in sceneData.GameObjectList)
+        {
+            string prefab_path = "Prefabs/" + gObject.name;
+            GameObject prefab = (GameObject)Resources.Load(prefab_path);
+            GameObject newObject1 = (GameObject)Instantiate(prefab);
+            own_GameObject2UnityGameObject(gObject, newObject1);
+        }
+
+    }
+
+
+    public void LoadObjectsIntoGame_dynamically(string path)
     {
         SceneData sceneData = GetSceneDataFromJsonFile(path);
         foreach (OwnGameObjectClass gObject in sceneData.GameObjectList)

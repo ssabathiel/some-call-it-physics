@@ -409,6 +409,7 @@
     <Compile Include="Assets\3rd-Party\TEXDraw\Script\TEXLink.cs" />
     <Compile Include="Assets\3rd-Party\TEXDraw\Script\TEXLinkBase.cs" />
     <Compile Include="Assets\Get_position.cs" />
+    <Compile Include="Assets\Scripts\extra_go_params.cs" />
     <Compile Include="Assets\Scripts\FSM_naming_manager.cs" />
     <Compile Include="Assets\Scripts\save_and_load_GOs.cs" />
   </ItemGroup>
