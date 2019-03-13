@@ -32,26 +32,7 @@ public class save_and_load_GOs : MonoBehaviour
     {
 
         // Get current Gameobjects
-        List<OwnGameObjectClass> gameObjectList = new List<OwnGameObjectClass>();
-        GameObject Protagonists = GameObject.Find("Protagonists");
-        int lll = 0;
-        System.Random rnd = new System.Random();
-
-        foreach (Transform gObject in Protagonists.transform)
-        {
-            
-            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
-
-            if (gObject.gameObject.GetComponent<extra_go_params>().go_ID_ == 0 )
-            {                
-                int rand_ID = rnd.Next(1, 100000000);
-                gObject.gameObject.GetComponent<extra_go_params>().go_ID_ = rand_ID;
-            }
-            gameObjectInScene.go_ID = gObject.gameObject.GetComponent<extra_go_params>().go_ID_;
-            
-            gameObjectList.Add(gameObjectInScene);
-
-        }
+        List<OwnGameObjectClass> gameObjectList = UnityGameObjectList2own_GameObjectList();
         // Get current Scene-settings
         GameObject cam = GameObject.Find("Main Camera");
         Material mat = RenderSettings.skybox;        
@@ -76,15 +57,12 @@ public class save_and_load_GOs : MonoBehaviour
 
     public void LoadSceneIntoGame(string path)
     {
-        SceneData sceneData = GetSceneDataFromJsonFile(path);
-        foreach (OwnGameObjectClass gObject in sceneData.GameObjectList)
-        {
-            string prefab_path = "Prefabs/" + gObject.name;
-            GameObject prefab = (GameObject)Resources.Load(prefab_path);
-            GameObject newObject1 = (GameObject)Instantiate(prefab);
 
-            own_GameObject2UnityGameObject(gObject, newObject1);
-        }
+        DestroyAllGameobjects();
+
+        SceneData sceneData = GetSceneDataFromJsonFile(path);
+        own_GameObjectList2UnityGameObjectList(sceneData.GameObjectList);
+
 
         //// Load SceneSettings: Camera and Skybox
         // Camera
@@ -99,7 +77,6 @@ public class save_and_load_GOs : MonoBehaviour
 
     }
 
-    /*
     public void LoadObjectsIntoGame(string path)
     {
         SceneData sceneData = GetSceneDataFromJsonFile(path);
@@ -112,20 +89,17 @@ public class save_and_load_GOs : MonoBehaviour
         }
 
     }
-    */
+
+
 
 
     public void LoadObjectsIntoGame_dynamically(string path)
     {
-        SceneData sceneData = GetSceneDataFromJsonFile(path);
-        foreach (OwnGameObjectClass gObject in sceneData.GameObjectList)
-        {
-            string prefab_path = "Prefabs/" + gObject.name;
-            GameObject prefab = (GameObject)Resources.Load(prefab_path);
-            GameObject newObject1 = (GameObject)Instantiate(prefab);
 
-            own_GameObject2UnityGameObject(gObject, newObject1);
-        }
+        SceneData sceneData = GetSceneDataFromJsonFile(path);
+        DestroyUnusedOldObjects(sceneData.GameObjectList);
+
+        own_GameObjectList2UnityGameObjectList(sceneData.GameObjectList);
 
         //// Load SceneSettings: Camera and Skybox
         // Camera
@@ -136,7 +110,74 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
 
-    SceneData GetSceneDataFromJsonFile(string path)
+
+    public void DestroyUnusedOldObjects(List<OwnGameObjectClass> newList)
+    {
+
+        // Destroy whole previous scene before
+        // https://stackoverflow.com/questions/38120084/how-can-we-destroy-child-objects-in-edit-modeunity3d
+        GameObject parenty = GameObject.Find("Protagonists");
+        var tempArray = new GameObject[parenty.transform.childCount];
+
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            tempArray[i] = parenty.transform.GetChild(i).gameObject;
+        }
+
+        foreach (var child in tempArray)
+        {
+            int go_ID = child.GetComponent<extra_go_params>().go_ID_;
+            if (IsGoID_InGoLIST(go_ID, newList));
+            DestroyImmediate(child);
+        }
+
+    }
+
+
+    public bool IsGoID_InGoLIST(int goID, List<OwnGameObjectClass> gameObjectList)
+    {
+        bool IDinList = false;
+        foreach (OwnGameObjectClass gObject in gameObjectList)
+        {
+            if (gObject.go_ID == goID)
+            {
+                IDinList = true;
+            }
+        }
+
+        return IDinList;
+
+    }
+
+
+
+
+
+    public void DestroyAllGameobjects()
+    {
+
+        // Destroy whole previous scene before
+        // https://stackoverflow.com/questions/38120084/how-can-we-destroy-child-objects-in-edit-modeunity3d
+        GameObject parenty = GameObject.Find("Protagonists");
+        var tempArray = new GameObject[parenty.transform.childCount];
+
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            tempArray[i] = parenty.transform.GetChild(i).gameObject;
+        }
+
+        foreach (var child in tempArray)
+        {
+            DestroyImmediate(child);
+        }
+
+    }
+
+
+
+
+
+        SceneData GetSceneDataFromJsonFile(string path)
     {
         SceneData sceneData;
         using (StreamReader r = new StreamReader(path))
@@ -147,6 +188,113 @@ public class save_and_load_GOs : MonoBehaviour
 
         return sceneData;
     }
+
+
+
+
+
+    public static List<OwnGameObjectClass> UnityGameObjectList2own_GameObjectList()
+    {
+
+        // Get current Gameobjects
+        List<OwnGameObjectClass> gameObjectList = new List<OwnGameObjectClass>();
+        GameObject Protagonists = GameObject.Find("Protagonists");
+        int lll = 0;
+        System.Random rnd = new System.Random();
+
+        foreach (Transform gObject in Protagonists.transform)
+        {
+
+            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
+
+            if (gObject.gameObject.GetComponent<extra_go_params>().go_ID_ == 0)
+            {
+                int rand_ID = rnd.Next(1, 100000000);
+                gObject.gameObject.GetComponent<extra_go_params>().go_ID_ = rand_ID;
+            }
+            gameObjectInScene.go_ID = gObject.gameObject.GetComponent<extra_go_params>().go_ID_;
+
+            gameObjectList.Add(gameObjectInScene);
+
+        }
+
+
+        return gameObjectList;
+
+    }
+
+
+
+    public static void TransformAndCreate2UnityGameObjectList(List<OwnGameObjectClass> newObjectList)
+    {
+        //List<OwnGameObjectClass> Protagonists = UnityGameObjectList2own_GameObjectList();
+        GameObject Protagonists = GameObject.Find("Protagonists");
+
+        foreach (OwnGameObjectClass newObject in newObjectList)
+        {
+
+            bool IDinList = false;
+
+            foreach (Transform oldObject in Protagonists.transform)
+            {
+                if (newObject.go_ID == oldObject.gameObject.GetComponent<extra_go_params>().go_ID_)
+                {
+                    IDinList = true;
+                    // Transform
+                    oldObject.position = Vector3.Lerp(oldObject.position, newObject.position, 1 * Time.deltaTime);
+                    Debug.Log("Transforming...");
+
+                }
+
+            }
+
+            if(IDinList == false)
+            {
+                string prefab_path = "Prefabs/" + newObject.name;
+                GameObject prefab = (GameObject)Resources.Load(prefab_path);
+                GameObject newObject1 = (GameObject)Instantiate(prefab);
+                own_GameObject2UnityGameObject(newObject, newObject1);
+            }
+
+            
+
+
+            /*
+            if(IsGoID_InGoLIST(gObject.go_ID, Protagonists) )
+            {
+                GoWithSameIDinList(int goID, List < OwnGameObjectClass > gameObjectList);
+                // Transform to
+            }
+            else
+            {
+                string prefab_path = "Prefabs/" + gObject.name;
+                GameObject prefab = (GameObject)Resources.Load(prefab_path);
+                GameObject newObject1 = (GameObject)Instantiate(prefab);
+                own_GameObject2UnityGameObject(gObject, newObject1);
+            }
+            */
+
+
+        }
+
+    }
+
+
+
+    public static void own_GameObjectList2UnityGameObjectList(List<OwnGameObjectClass> gameObjectList)
+    {
+        foreach (OwnGameObjectClass gObject in gameObjectList)
+        {
+            string prefab_path = "Prefabs/" + gObject.name;
+            GameObject prefab = (GameObject)Resources.Load(prefab_path);
+            GameObject newObject1 = (GameObject)Instantiate(prefab);
+
+            own_GameObject2UnityGameObject(gObject, newObject1);
+        }
+
+    }
+
+
 
 
     public static void own_GameObject2UnityGameObject(OwnGameObjectClass own_GO, GameObject GO)

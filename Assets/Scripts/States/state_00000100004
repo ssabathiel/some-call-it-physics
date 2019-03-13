@@ -18,7 +18,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 8,
+            "go_ID": 10724206,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -49,7 +49,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 40244223,
+            "go_ID": 22053249,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -80,7 +80,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 73419868,
+            "go_ID": 85742922,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -111,7 +111,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 22511305,
+            "go_ID": 45766929,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -142,7 +142,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 37237725,
+            "go_ID": 80331253,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -163,8 +163,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 22.868816375732423,
-                "y": 8.067950248718262,
+                "x": 31.13881492614746,
+                "y": 3.8779501914978029,
                 "z": 0.0
             },
             "rotation": {
@@ -173,7 +173,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 45080243,
+            "go_ID": 79515007,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",

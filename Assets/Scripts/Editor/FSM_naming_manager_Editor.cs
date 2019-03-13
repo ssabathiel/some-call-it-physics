@@ -87,21 +87,26 @@ public class FSM_naming_manager_Editor : Editor
             save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
             string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + sel_state.name;
 
-            // Destroy whole previous scene before
-            // https://stackoverflow.com/questions/38120084/how-can-we-destroy-child-objects-in-edit-modeunity3d
-            GameObject parenty = GameObject.Find("Protagonists");
-            var tempArray = new GameObject[parenty.transform.childCount];
 
-            for (int i = 0; i < tempArray.Length; i++)
-            {
-                tempArray[i] = parenty.transform.GetChild(i).gameObject;
-            }
-
-            foreach (var child in tempArray)
-            {
-                DestroyImmediate(child);
-            }
             myscript.LoadSceneIntoGame(pathy);
+
+
+
+        }
+
+
+        if (GUILayout.Button("Load Scene dynamically"))
+        {
+
+            GameObject sel_state = Selection.activeGameObject;
+
+            //Save current scene to corresponding file name
+            GameObject go = GameObject.Find("@state_scripts");
+            save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+            string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + sel_state.name;
+
+
+            myscript.LoadObjectsIntoGame_dynamically(pathy);
 
 
 
