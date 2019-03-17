@@ -7,6 +7,19 @@ using UnityEngine.UI;
 
 public class save_and_load_GOs : MonoBehaviour
 {
+    public string active_state = "";
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            NextStateInGame();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            PrevStateInGame();
+        }
+    }
 
     void Awake()
     {
@@ -14,7 +27,70 @@ public class save_and_load_GOs : MonoBehaviour
 
     void Start()
     {
-        
+
+    }
+
+    void OnGUI()
+    {
+        if (GUI.Button(new Rect(20, 20, 100, 100), "Next State"))
+        {
+            NextStateInGame();
+        }
+    }
+
+    public void NextStateInGame()
+    {
+
+        GameObject go = GameObject.Find("@state_scripts");
+        save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+        string current_state = myscript.active_state;
+        string next_state_name = nextStateString(current_state);
+        string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + next_state_name;
+        Debug.Log("next_state_name 0 " + next_state_name);
+        myscript.LoadObjectsIntoGame_dynamically(pathy);
+        myscript.active_state = next_state_name;
+       
+    }
+
+
+
+    public void PrevStateInGame()
+    {
+
+        GameObject go = GameObject.Find("@state_scripts");
+        save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+        string current_state = myscript.active_state;
+        string next_state_name = prevStateString(current_state);
+        string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + next_state_name;
+        Debug.Log("next_state_name 0 " + next_state_name);
+        myscript.LoadObjectsIntoGame_dynamically(pathy);
+        myscript.active_state = next_state_name;
+
+    }
+
+    public static string nextStateString(string stateName)
+    {
+        int num_of_digits = 11;
+        string nextStateName;
+        nextStateName = stateName.Substring(stateName.Length - num_of_digits);
+        int x = Convert.ToInt32(nextStateName);
+        x += 1;
+        nextStateName = "state_" + x.ToString(new String('0', num_of_digits));
+        //State_000010000
+        return nextStateName;
+    }
+
+
+    public static string prevStateString(string stateName)
+    {
+        int num_of_digits = 11;
+        string nextStateName;
+        nextStateName = stateName.Substring(stateName.Length - num_of_digits);
+        int x = Convert.ToInt32(nextStateName);
+        x -= 1;
+        nextStateName = "state_" + x.ToString(new String('0', num_of_digits));
+        //State_000010000
+        return nextStateName;
     }
 
 
@@ -97,9 +173,10 @@ public class save_and_load_GOs : MonoBehaviour
     {
 
         SceneData sceneData = GetSceneDataFromJsonFile(path);
-        DestroyUnusedOldObjects(sceneData.GameObjectList);
+        //DestroyUnusedOldObjects(sceneData.GameObjectList);
 
-        own_GameObjectList2UnityGameObjectList(sceneData.GameObjectList);
+        //own_GameObjectList2UnityGameObjectList(sceneData.GameObjectList);
+        TransformAndCreate2UnityGameObjectList(sceneData.GameObjectList);
 
         //// Load SceneSettings: Camera and Skybox
         // Camera
@@ -127,8 +204,11 @@ public class save_and_load_GOs : MonoBehaviour
         foreach (var child in tempArray)
         {
             int go_ID = child.GetComponent<extra_go_params>().go_ID_;
-            if (IsGoID_InGoLIST(go_ID, newList));
-            DestroyImmediate(child);
+            if (IsGoID_InGoLIST(go_ID, newList))
+            {
+                DestroyImmediate(child);
+            }
+            
         }
 
     }
@@ -229,20 +309,37 @@ public class save_and_load_GOs : MonoBehaviour
     {
         //List<OwnGameObjectClass> Protagonists = UnityGameObjectList2own_GameObjectList();
         GameObject Protagonists = GameObject.Find("Protagonists");
-
+        int county = 0;
         foreach (OwnGameObjectClass newObject in newObjectList)
         {
 
             bool IDinList = false;
-
+            
             foreach (Transform oldObject in Protagonists.transform)
             {
                 if (newObject.go_ID == oldObject.gameObject.GetComponent<extra_go_params>().go_ID_)
                 {
                     IDinList = true;
                     // Transform
-                    oldObject.position = Vector3.Lerp(oldObject.position, newObject.position, 1 * Time.deltaTime);
-                    Debug.Log("Transforming...");
+                    //oldObject.position = Vector3.Lerp(oldObject.position, newObject.position, (float)0.1 * Time.deltaTime);
+                    //IEnumerator coroutine = WholeMoveObject(oldObject, newObject);
+
+
+                    //IEnumerator coroutine = moveToX(oldObject, newObject.position, 1.0f);
+                    GameObject go = GameObject.Find("@state_scripts");
+                    save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+                    //myscript.StartCoroutine(myscript.moveToX(oldObject, newObject.position, 10.0f));
+                    myscript.StartCoroutine(myscript.WholeMoveObject(oldObject, newObject));
+                    //myscript.WholeMoveObject(oldObject, newObject);
+                    
+                    county++;
+                    //MoveObject moveObject;
+                    //StartCoroutine(MoveObject.use.Translation(oldObject, Vector3.up, 0.5f, MoveObject.MoveType.Time));
+
+                    //StartCoroutine(moveToX(oldObject, newObject.position, 1.0f));
+
+                    //Debug.Log("oldObject.position " + oldObject.position);
+                    //Debug.Log("newObject.position " + newObject.position);
 
                 }
 
@@ -252,8 +349,8 @@ public class save_and_load_GOs : MonoBehaviour
             {
                 string prefab_path = "Prefabs/" + newObject.name;
                 GameObject prefab = (GameObject)Resources.Load(prefab_path);
-                GameObject newObject1 = (GameObject)Instantiate(prefab);
-                own_GameObject2UnityGameObject(newObject, newObject1);
+                //GameObject newObject1 = (GameObject)Instantiate(prefab);
+                //own_GameObject2UnityGameObject(newObject, newObject1);
             }
 
             
@@ -278,8 +375,35 @@ public class save_and_load_GOs : MonoBehaviour
         }
 
     }
+    bool isMoving = false;
 
+    IEnumerator moveToX(Transform fromPosition, Vector3 toPosition, float duration)
+    {
+        Debug.Log("is Moving " + isMoving);
+        //Make sure there is only one instance of this function running
+        if (isMoving)
+        {
+            yield break; ///exit if this is still running
+        }
+        isMoving = true;
 
+        float counter = 0;
+
+        //Get the current position of the object to be moved
+        Vector3 startPos = fromPosition.position;
+        Debug.Log("counter = " + counter);
+        Debug.Log("duration = " + duration);
+        while (counter < duration)
+        {
+            //Debug.Log("In move loop");
+            counter += Time.deltaTime;
+            fromPosition.position = Vector3.Lerp(startPos, toPosition, counter / duration);
+            yield return null;
+            
+        }
+
+        isMoving = false;
+    }
 
     public static void own_GameObjectList2UnityGameObjectList(List<OwnGameObjectClass> gameObjectList)
     {
@@ -310,6 +434,35 @@ public class save_and_load_GOs : MonoBehaviour
         GO.gameObject.GetComponent<extra_go_params>().go_ID_ = own_GO.go_ID;
 
     }
+
+    
+    IEnumerator WholeMoveObject(Transform oldObject, OwnGameObjectClass newObject)
+    {
+        var startpos = oldObject.position;
+        Vector3 endpos = newObject.position;
+        while (true)
+        {
+            yield return StartCoroutine(MoveObject(oldObject, startpos, endpos, 0.5f));
+            //yield return StartCoroutine(MoveObject(oldObject, endpos, startpos, 3.0f));
+            //yield return StartCoroutine(MoveObject(oldObject.transform, pointB, pointA, 3.0f));
+            break;
+        }
+    }
+
+    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
+    {
+        var i = 0.0f;
+        var rate = 1.0f / time;
+        while (i < 1.0f)
+        {
+            
+            i += Time.deltaTime * rate;
+            thisTransform.position = Vector3.Lerp(startPos, endPos, i);
+            yield return null;
+        }
+    }
+    
+
 
 
 }
@@ -410,6 +563,64 @@ public class SceneSettings
 
 }
 
+
+
+
+
+
+
+public class MoveObject : MonoBehaviour
+{
+
+    public enum MoveType { Time, Speed }
+    public static MoveObject use = null;
+
+    void Awake()
+    {
+        if (use)
+        {
+            Debug.LogWarning("Only one instance of the MoveObject script in a scene is allowed");
+            return;
+        }
+        use = this;
+    }
+
+    public IEnumerator TranslateTo(Transform thisTransform, Vector3 endPos, float value, MoveType moveType)
+    {
+        yield return Translation(thisTransform, thisTransform.position, endPos, value, moveType);
+    }
+
+    public IEnumerator Translation(Transform thisTransform, Vector3 endPos, float value, MoveType moveType)
+    {
+        yield return Translation(thisTransform, thisTransform.position, thisTransform.position + endPos, value, moveType);
+    }
+
+    public IEnumerator Translation(Transform thisTransform, Vector3 startPos, Vector3 endPos, float value, MoveType moveType)
+    {
+        float rate = (moveType == MoveType.Time) ? 1.0f / value : 1.0f / Vector3.Distance(startPos, endPos) * value;
+        float t = 0.0f;
+        while (t < 1.0)
+        {
+            t += Time.deltaTime * rate;
+            thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return null;
+        }
+    }
+
+    public IEnumerator Rotation(Transform thisTransform, Vector3 degrees, float time)
+    {
+        Quaternion startRotation = thisTransform.rotation;
+        Quaternion endRotation = thisTransform.rotation * Quaternion.Euler(degrees);
+        float rate = 1.0f / time;
+        float t = 0.0f;
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime * rate;
+            thisTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+            yield return null;
+        }
+    }
+}
 
 
 

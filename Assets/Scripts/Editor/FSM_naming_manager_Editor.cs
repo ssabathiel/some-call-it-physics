@@ -89,7 +89,7 @@ public class FSM_naming_manager_Editor : Editor
 
 
             myscript.LoadSceneIntoGame(pathy);
-
+            myscript.active_state = sel_state.name;
 
 
         }
@@ -105,12 +105,13 @@ public class FSM_naming_manager_Editor : Editor
             save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
             string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + sel_state.name;
 
-
             myscript.LoadObjectsIntoGame_dynamically(pathy);
 
-
+            myscript.active_state = sel_state.name;
 
         }
+
+
 
 
 
