@@ -323,6 +323,7 @@
     <Compile Include="Assets\3rd-Party\TEXDraw\Core\Editor\TEXSupplementEditor.cs" />
     <Compile Include="Assets\Scripts\Editor\Foldable_Window.cs" />
     <Compile Include="Assets\Scripts\Editor\FSM_naming_manager_Editor.cs" />
+    <Compile Include="Assets\Scripts\Editor\GO_inspector.cs" />
     <Compile Include="Assets\Scripts\Editor\save_and_load_GOs_editor.cs" />
   </ItemGroup>
   <ItemGroup>

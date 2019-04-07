@@ -507,9 +507,14 @@ public class save_and_load_GOs : MonoBehaviour
     {
         var startpos = oldObject.position;
         Vector3 endpos = newObject.position;
+        MoveObject moveObject = new MoveObject();
         while (true)
         {
-            yield return StartCoroutine(MoveObject(oldObject, startpos, endpos, 0.5f));
+            //yield return moveObject.Translation(oldObject, startpos, endpos, 0.5f, MoveObject.MoveType.Time);
+            yield return moveObject.Translation(oldObject, startpos, endpos, 80.0f, MoveObject.MoveType.Speed, SpeedFct: "easeInOutSine");
+            
+            //yield return StartCoroutine(MoveObject(oldObject, startpos, endpos, 0.5f));
+
             //yield return StartCoroutine(MoveObject(oldObject, endpos, startpos, 3.0f));
             //yield return StartCoroutine(MoveObject(oldObject.transform, pointB, pointA, 3.0f));
             break;
@@ -564,7 +569,7 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
 
-    IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
+    IEnumerator LinearMoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
     {
         var i = 0.0f;
         var rate = 1.0f / time;
@@ -710,12 +715,25 @@ public class MoveObject : MonoBehaviour
         yield return Translation(thisTransform, thisTransform.position, thisTransform.position + endPos, value, moveType);
     }
 
-    public IEnumerator Translation(Transform thisTransform, Vector3 startPos, Vector3 endPos, float value, MoveType moveType)
+    public IEnumerator Translation(Transform thisTransform, Vector3 startPos, Vector3 endPos, float value, MoveType moveType, string SpeedFct = "linear")
     {
-        float rate = (moveType == MoveType.Time) ? 1.0f / value : 1.0f / Vector3.Distance(startPos, endPos) * value;
+        // float rate = ... was here before, but want it to make time dependend. 
         float t = 0.0f;
         while (t < 1.0)
         {
+            if(moveType == MoveType.Speed)
+            {
+                switch(SpeedFct)
+                {
+                    case "linear":
+                        value = value;
+                        break;
+                    case "easInOutSine":
+                        value = (1.0f + (float)Math.Sin((float)Math.PI * t - (float)Math.PI / 2.0f)) / 2.0f;
+                        break;
+                }
+            }
+            float rate = (moveType == MoveType.Time) ? 1.0f / value : 1.0f / Vector3.Distance(startPos, endPos) * value;
             t += Time.deltaTime * rate;
             thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
             yield return null;
