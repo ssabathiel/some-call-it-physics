@@ -188,7 +188,7 @@ public class save_and_load_GOs : MonoBehaviour
 
 
 
-    public void DestroyUnusedOldObjects(List<OwnGameObjectClass> newList)
+    public static void DestroyUnusedOldObjects(List<OwnGameObjectClass> newList)
     {
 
         // Destroy whole previous scene before
@@ -204,7 +204,7 @@ public class save_and_load_GOs : MonoBehaviour
         foreach (var child in tempArray)
         {
             int go_ID = child.GetComponent<extra_go_params>().go_ID_;
-            if (IsGoID_InGoLIST(go_ID, newList))
+            if (!IsGoID_InGoLIST(go_ID, newList))
             {
                 DestroyImmediate(child);
             }
@@ -214,7 +214,7 @@ public class save_and_load_GOs : MonoBehaviour
     }
 
 
-    public bool IsGoID_InGoLIST(int goID, List<OwnGameObjectClass> gameObjectList)
+    public static bool IsGoID_InGoLIST(int goID, List<OwnGameObjectClass> gameObjectList)
     {
         bool IDinList = false;
         foreach (OwnGameObjectClass gObject in gameObjectList)
@@ -309,6 +309,10 @@ public class save_and_load_GOs : MonoBehaviour
     {
         //List<OwnGameObjectClass> Protagonists = UnityGameObjectList2own_GameObjectList();
         GameObject Protagonists = GameObject.Find("Protagonists");
+
+        // Destroy Unused Objects
+        DestroyUnusedOldObjects(newObjectList);
+
         int county = 0;
         foreach (OwnGameObjectClass newObject in newObjectList)
         {
@@ -347,10 +351,22 @@ public class save_and_load_GOs : MonoBehaviour
 
             if(IDinList == false)
             {
+
                 string prefab_path = "Prefabs/" + newObject.name;
                 GameObject prefab = (GameObject)Resources.Load(prefab_path);
                 //GameObject newObject1 = (GameObject)Instantiate(prefab);
+                GameObject go = GameObject.Find("@state_scripts");
+                save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+                //myscript.StartCoroutine(myscript.moveToX(oldObject, newObject.position, 10.0f));
+
                 //own_GameObject2UnityGameObject(newObject, newObject1);
+
+                myscript.PlayBlop();
+                myscript.StartCoroutine(myscript.BlobAppear(prefab));
+                    
+                
+                
+
             }
 
             
@@ -435,6 +451,25 @@ public class save_and_load_GOs : MonoBehaviour
 
     }
 
+    public static void PlayBlop()
+    {
+        //AUDIO
+        WWW www;
+        AudioClip myAudioClip;
+        string path;
+
+        path = "file://" + Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/")) + "/Assets/Resources/Audio/161628__crazyfrog249__blop";
+        www = new WWW(path);
+        myAudioClip = www.GetAudioClip();
+
+        GameObject parenty = GameObject.Find("Protagonists");
+        GameObject tmpGameObject = parenty;
+        tmpGameObject.GetComponent<AudioSource>().clip = myAudioClip;
+        tmpGameObject.GetComponent<AudioSource>().playOnAwake = false;
+        tmpGameObject.GetComponent<AudioSource>().volume = 0.999f;
+        tmpGameObject.GetComponent<AudioSource>().Play();
+    }
+
     
     IEnumerator WholeMoveObject(Transform oldObject, OwnGameObjectClass newObject)
     {
@@ -448,6 +483,62 @@ public class save_and_load_GOs : MonoBehaviour
             break;
         }
     }
+
+    IEnumerator BlobAppear(GameObject go)
+    {
+        //float endscale_f = 20.01f;
+        //Vector3 endscale = new Vector3(endscale_f, endscale_f, endscale_f);  //go.transform.localScale;
+        Vector3 endscale = go.transform.localScale;
+        Debug.Log(endscale.magnitude);
+        float startscale_f = 0.1f;
+        Vector3 startscale = new Vector3(startscale_f, startscale_f, startscale_f);        
+        GameObject newObject1 = (GameObject)Instantiate(go);
+
+        GameObject parenty = GameObject.Find("Protagonists");
+        newObject1.transform.parent = parenty.transform;
+        newObject1.transform.localScale = startscale;
+
+        //GameObject parenty = GameObject.Find("Protagonists");
+        //GameObject newObject1 = (GameObject)Instantiate(go, parenty.transform, true);
+
+        //own_GameObject2UnityGameObject(newObject, newObject1);
+        while (true)
+        {
+            yield return StartCoroutine(IncreaseSize(newObject1.transform, startscale, endscale, 0.3f));
+            //yield return false;
+            break;
+        }
+        
+    }
+
+    IEnumerator IncreaseSize(Transform thisTransform, Vector3 startScale, Vector3 endScale, float time)
+    {
+        var i = 0.0f;
+        var rate = 1.0f / time;
+        float growFactor = 1.1f;
+        Debug.Log(endScale.magnitude);
+
+        Debug.Log("startScale.magnitude:");
+        Debug.Log(thisTransform.localScale.magnitude);
+        Debug.Log("endScale.magnitude:");
+        Debug.Log(endScale.magnitude);
+
+        while (thisTransform.localScale.magnitude < endScale.magnitude )
+        { 
+
+            i += Time.deltaTime * rate;
+            thisTransform.localScale += new Vector3(1, 1, 1) * i * growFactor;
+            
+            Debug.Log("startScale.magnitude:");
+            Debug.Log(thisTransform.localScale.magnitude);
+            Debug.Log("endScale.magnitude:");
+            Debug.Log(endScale.magnitude);
+            
+
+            yield return null;
+        }
+    }
+
 
     IEnumerator MoveObject(Transform thisTransform, Vector3 startPos, Vector3 endPos, float time)
     {

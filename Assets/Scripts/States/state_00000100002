@@ -1,86 +1,24 @@
 {
     "GameObjectList": [
         {
-            "name": "ingenous",
+            "name": "sheep",
             "scale": {
-                "x": 1.0,
-                "y": 1.0,
+                "x": 1.6235405206680298,
+                "y": 1.5412684679031373,
                 "z": 1.0
             },
             "position": {
-                "x": -18.33118438720703,
-                "y": 5.16795015335083,
-                "z": -1.83984375
+                "x": 25.568815231323243,
+                "y": 10.267950057983399,
+                "z": -0.3601562976837158
             },
             "rotation": {
                 "x": 0.0,
-                "y": 0.0,
+                "y": 0.008727774024009705,
                 "z": 0.0,
-                "w": 1.0
+                "w": 0.9999619126319885
             },
-            "go_ID": 64884252,
-            "transition_style": "",
-            "transition_style2": "",
-            "animation_style": "",
-            "animation_style2": "",
-            "animation_style3": "",
-            "dummy_component1": "",
-            "dummy_component2": "",
-            "dummy_component3": 0,
-            "dummy_component4": 0,
-            "dummy_component5": 0.0,
-            "dummy_component6": false
-        },
-        {
-            "name": "ingenous",
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "position": {
-                "x": -9.631183624267579,
-                "y": 5.967950344085693,
-                "z": -1.83984375
-            },
-            "rotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-            },
-            "go_ID": 69772746,
-            "transition_style": "",
-            "transition_style2": "",
-            "animation_style": "",
-            "animation_style2": "",
-            "animation_style3": "",
-            "dummy_component1": "",
-            "dummy_component2": "",
-            "dummy_component3": 0,
-            "dummy_component4": 0,
-            "dummy_component5": 0.0,
-            "dummy_component6": false
-        },
-        {
-            "name": "ingenous",
-            "scale": {
-                "x": 1.0,
-                "y": 1.0,
-                "z": 1.0
-            },
-            "position": {
-                "x": -30.131183624267579,
-                "y": 5.367950439453125,
-                "z": -1.83984375
-            },
-            "rotation": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0,
-                "w": 1.0
-            },
-            "go_ID": 86582310,
+            "go_ID": 83165280,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -101,17 +39,17 @@
                 "z": 1.0
             },
             "position": {
-                "x": -18.83118438720703,
-                "y": 8.367950439453125,
+                "x": 7.46881628036499,
+                "y": 2.66795015335083,
                 "z": -1.83984375
             },
             "rotation": {
-                "x": -0.008725271560251713,
-                "y": 0.008725692518055439,
-                "z": 0.00007615876529598609,
-                "w": 0.9999239444732666
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
             },
-            "go_ID": 44522120,
+            "go_ID": 68381578,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -125,15 +63,15 @@
             "dummy_component6": false
         },
         {
-            "name": "sheep",
+            "name": "ingenous",
             "scale": {
-                "x": 1.6235405206680298,
-                "y": 1.5412684679031373,
+                "x": 1.0,
+                "y": 1.0,
                 "z": 1.0
             },
             "position": {
-                "x": -9.531183242797852,
-                "y": 9.567950248718262,
+                "x": -22.53118324279785,
+                "y": 3.2679500579833986,
                 "z": -1.83984375
             },
             "rotation": {
@@ -142,7 +80,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 13897011,
+            "go_ID": 92326199,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",
@@ -156,16 +94,16 @@
             "dummy_component6": false
         },
         {
-            "name": "sheep",
+            "name": "ingenous",
             "scale": {
-                "x": 1.6235405206680298,
-                "y": 1.5412684679031373,
+                "x": 1.0,
+                "y": 1.0,
                 "z": 1.0
             },
             "position": {
-                "x": -30.229124069213868,
-                "y": 9.48618221282959,
-                "z": -1.83984375
+                "x": -24.131183624267579,
+                "y": 10.667950630187989,
+                "z": 0.0
             },
             "rotation": {
                 "x": 0.0,
@@ -173,7 +111,7 @@
                 "z": 0.0,
                 "w": 1.0
             },
-            "go_ID": 94502113,
+            "go_ID": 57366967,
             "transition_style": "",
             "transition_style2": "",
             "animation_style": "",

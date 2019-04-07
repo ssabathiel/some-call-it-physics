@@ -25,22 +25,23 @@ public class FSM_naming_manager : MonoBehaviour
         Transform sel_state_parent = sel_state.transform.parent;
         int sel_state_number = getStateNumber(sel_state);
 
-        foreach (Transform child in sel_state_parent)
+        foreach (Transform child in sel_state_parent)  // why loop only through siblings?
         {
             int stateNumber = getStateNumber(child.gameObject);
-            if (stateNumber > sel_state_number)
+            if (stateNumber >= sel_state_number)
             {
-                child.gameObject.name = prevStateString(child.gameObject.name);
+                //child.gameObject.name = prevStateString(child.gameObject.name);
             }
         }
       
-        SortChildrenByName(sel_state);
+        //SortChildrenByName(sel_state);
 
         //File management
         string sourcefileName = sel_state.name;
         string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
         string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
-        System.IO.File.Delete(sourceFile);
+        //System.IO.File.Delete(sourceFile);    // responsible for deleting all files when running. shit.   
+        //DestroyImmediate(sel_state);
 
         GameObject statess = GameObject.Find("@state_data");
         int state_i = 0;
@@ -48,6 +49,7 @@ public class FSM_naming_manager : MonoBehaviour
         IntermediateFiles2Files(statess, state_i);
 
     }
+
 
 
 
@@ -161,7 +163,7 @@ public class FSM_naming_manager : MonoBehaviour
 
             string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
             string targetPath = sourcePath;
-            string targetfileName = obj.name;
+            string targetfileName = obj.name + "_";
 
             string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
             string destFile = System.IO.Path.Combine(targetPath, targetfileName);

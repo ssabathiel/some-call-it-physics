@@ -14,12 +14,6 @@ public class FSM_naming_manager_Editor : Editor
     {
         DrawDefaultInspector();
 
-        FSM_naming_manager myScript = (FSM_naming_manager)target;
-        if (GUILayout.Button("Build Object"))
-        {
-            myScript.BuildObject();
-        }
-
 
 
         if (GUILayout.Button("Restructure state names"))
@@ -95,6 +89,7 @@ public class FSM_naming_manager_Editor : Editor
         }
 
 
+
         if (GUILayout.Button("Load Scene dynamically"))
         {
 
@@ -112,13 +107,35 @@ public class FSM_naming_manager_Editor : Editor
         }
 
 
+        if (GUILayout.Button("Delete Scene"))
+        {
 
+            GameObject sel_state = Selection.activeGameObject;
+
+            DestroyGameObject(sel_state);
+
+
+        }
 
 
 
     }
 
+    public void DestroyGameObject(GameObject go)
+    {
+        
+        string sourcefileName = go.name;
+        string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
+        string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
+        System.IO.File.Delete(sourceFile);
+        DestroyImmediate(go);
 
+        GameObject statess = GameObject.Find("@state_data");
+        int state_i = 0;
+        RenameStates1toN(statess, ref state_i);
+        IntermediateFiles2Files(statess, state_i);
+
+    }
 
     public static void AddState(ref string added_file_path)
     {
@@ -297,7 +314,7 @@ public class FSM_naming_manager_Editor : Editor
             
             string sourcePath = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States";
             string targetPath = sourcePath;
-            string targetfileName = obj.name;
+            string targetfileName = obj.name + "_";
 
             string sourceFile = System.IO.Path.Combine(sourcePath, sourcefileName);
             string destFile = System.IO.Path.Combine(targetPath, targetfileName);
