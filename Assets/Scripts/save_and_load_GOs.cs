@@ -361,7 +361,7 @@ public class save_and_load_GOs : MonoBehaviour
 
                 //own_GameObject2UnityGameObject(newObject, newObject1);
 
-                myscript.PlayBlop();
+                PlayBlop();
                 myscript.StartCoroutine(myscript.BlobAppear(prefab));
                     
                 
@@ -395,7 +395,7 @@ public class save_and_load_GOs : MonoBehaviour
 
     IEnumerator moveToX(Transform fromPosition, Vector3 toPosition, float duration)
     {
-        Debug.Log("is Moving " + isMoving);
+
         //Make sure there is only one instance of this function running
         if (isMoving)
         {
@@ -407,8 +407,7 @@ public class save_and_load_GOs : MonoBehaviour
 
         //Get the current position of the object to be moved
         Vector3 startPos = fromPosition.position;
-        Debug.Log("counter = " + counter);
-        Debug.Log("duration = " + duration);
+
         while (counter < duration)
         {
             //Debug.Log("In move loop");
@@ -453,21 +452,28 @@ public class save_and_load_GOs : MonoBehaviour
 
     public static void PlayBlop()
     {
+        
         //AUDIO
         WWW www;
         AudioClip myAudioClip;
         string path;
 
-        path = "file://" + Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/")) + "/Assets/Resources/Audio/161628__crazyfrog249__blop";
+        path = "file://" + Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/")) + "/Assets/Resources/Audio/161628__crazyfrog249__blop.wav";
         www = new WWW(path);
         myAudioClip = www.GetAudioClip();
 
         GameObject parenty = GameObject.Find("Protagonists");
-        GameObject tmpGameObject = parenty;
-        tmpGameObject.GetComponent<AudioSource>().clip = myAudioClip;
-        tmpGameObject.GetComponent<AudioSource>().playOnAwake = false;
-        tmpGameObject.GetComponent<AudioSource>().volume = 0.999f;
-        tmpGameObject.GetComponent<AudioSource>().Play();
+        //GameObject tmpGameObject = parenty;
+        parenty.GetComponent<AudioSource>().clip = myAudioClip;
+        parenty.GetComponent<AudioSource>().playOnAwake = true;
+        parenty.GetComponent<AudioSource>().volume = 0.999f;
+        parenty.GetComponent<AudioSource>().time = 0.0f;
+
+            //parenty.GetComponent<AudioSource>().Stop();
+            parenty.GetComponent<AudioSource>().PlayOneShot(myAudioClip);
+        
+        //parenty.GetComponent<AudioSource>().Play();
+        Debug.Log("Play AudioSound");
     }
 
     
@@ -486,13 +492,15 @@ public class save_and_load_GOs : MonoBehaviour
 
     IEnumerator BlobAppear(GameObject go)
     {
+        
         //float endscale_f = 20.01f;
         //Vector3 endscale = new Vector3(endscale_f, endscale_f, endscale_f);  //go.transform.localScale;
         Vector3 endscale = go.transform.localScale;
-        Debug.Log(endscale.magnitude);
         float startscale_f = 0.1f;
         Vector3 startscale = new Vector3(startscale_f, startscale_f, startscale_f);        
         GameObject newObject1 = (GameObject)Instantiate(go);
+
+        
 
         GameObject parenty = GameObject.Find("Protagonists");
         newObject1.transform.parent = parenty.transform;
@@ -516,24 +524,14 @@ public class save_and_load_GOs : MonoBehaviour
         var i = 0.0f;
         var rate = 1.0f / time;
         float growFactor = 1.1f;
-        Debug.Log(endScale.magnitude);
 
-        Debug.Log("startScale.magnitude:");
-        Debug.Log(thisTransform.localScale.magnitude);
-        Debug.Log("endScale.magnitude:");
-        Debug.Log(endScale.magnitude);
+
 
         while (thisTransform.localScale.magnitude < endScale.magnitude )
         { 
 
             i += Time.deltaTime * rate;
             thisTransform.localScale += new Vector3(1, 1, 1) * i * growFactor;
-            
-            Debug.Log("startScale.magnitude:");
-            Debug.Log(thisTransform.localScale.magnitude);
-            Debug.Log("endScale.magnitude:");
-            Debug.Log(endScale.magnitude);
-            
 
             yield return null;
         }
