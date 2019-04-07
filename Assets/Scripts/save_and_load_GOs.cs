@@ -5,9 +5,11 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class save_and_load_GOs : MonoBehaviour
 {
     public string active_state = "";
+
 
     void Update()
     {
@@ -19,6 +21,8 @@ public class save_and_load_GOs : MonoBehaviour
         {
             PrevStateInGame();
         }
+
+
     }
 
     void Awake()
@@ -32,11 +36,17 @@ public class save_and_load_GOs : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(20, 20, 100, 100), "Next State"))
+
+
+        if (GUI.Button(new Rect(20, 20, 100, 100), "Play audio"))
         {
-            NextStateInGame();
+            //NextStateInGame();
+            //PlayOwnAudio("blop");
+
         }
     }
+
+
 
     public void NextStateInGame()
     {
@@ -334,8 +344,9 @@ public class save_and_load_GOs : MonoBehaviour
                     save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
                     //myscript.StartCoroutine(myscript.moveToX(oldObject, newObject.position, 10.0f));
                     myscript.StartCoroutine(myscript.WholeMoveObject(oldObject, newObject));
+                    PlayOwnAudio("swipe");
                     //myscript.WholeMoveObject(oldObject, newObject);
-                    
+
                     county++;
                     //MoveObject moveObject;
                     //StartCoroutine(MoveObject.use.Translation(oldObject, Vector3.up, 0.5f, MoveObject.MoveType.Time));
@@ -361,7 +372,7 @@ public class save_and_load_GOs : MonoBehaviour
 
                 //own_GameObject2UnityGameObject(newObject, newObject1);
 
-                PlayBlop();
+                PlayOwnAudio("blop");
                 myscript.StartCoroutine(myscript.BlobAppear(prefab));
                     
                 
@@ -450,33 +461,48 @@ public class save_and_load_GOs : MonoBehaviour
 
     }
 
-    public static void PlayBlop()
+    
+    public static void PlayOwnAudio(string file)
     {
-        
+        GameObject parenty = GameObject.Find("Protagonists");
+        GameObject go = GameObject.Find("@state_scripts");
+        save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+
+        myscript.StartCoroutine(myscript.playMusic(parenty, file));
+
+    }
+
+    
+
+    public IEnumerator playMusic(GameObject parenty, string file)
+    {
         //AUDIO
         WWW www;
         AudioClip myAudioClip;
         string path;
 
-        path = "file://" + Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/")) + "/Assets/Resources/Audio/161628__crazyfrog249__blop.wav";
+        path = "file://" + Application.dataPath.Substring(0, Application.dataPath.LastIndexOf("/")) + "/Assets/Resources/Audio/" + file + ".wav";
         www = new WWW(path);
+        yield return www;
         myAudioClip = www.GetAudioClip();
 
-        GameObject parenty = GameObject.Find("Protagonists");
+        
         //GameObject tmpGameObject = parenty;
+        //parenty.AddComponent<AudioSource>();
+
         parenty.GetComponent<AudioSource>().clip = myAudioClip;
         parenty.GetComponent<AudioSource>().playOnAwake = true;
         parenty.GetComponent<AudioSource>().volume = 0.999f;
         parenty.GetComponent<AudioSource>().time = 0.0f;
+        parenty.GetComponent<AudioSource>().priority = 0;
 
-            //parenty.GetComponent<AudioSource>().Stop();
-            parenty.GetComponent<AudioSource>().PlayOneShot(myAudioClip);
-        
+        //parenty.GetComponent<AudioSource>().Stop();
+        parenty.GetComponent<AudioSource>().PlayOneShot(myAudioClip);
+        //Destroy(parenty.GetComponent<AudioSource>());
         //parenty.GetComponent<AudioSource>().Play();
         Debug.Log("Play AudioSound");
     }
 
-    
     IEnumerator WholeMoveObject(Transform oldObject, OwnGameObjectClass newObject)
     {
         var startpos = oldObject.position;
