@@ -22,6 +22,15 @@ public class GO_inspector : Editor {
     string[] _speed_fct_choices = new[] { "linear", "easeInOutSine" };
     int _speed_fct_choiceIndex = 0;
 
+    string[] _rotation_type_choices = new[] { "Time", "Speed" };
+    int _rotation_type_choiceIndex = 0;
+
+    string[] _rotationspeed_fct_choices = new[] { "linear", "easeInOutSine" };
+    int _rotationspeed_fct_choiceIndex = 0;
+
+
+    bool RotTranslSyncBtn = true;
+
 
     public override void OnInspectorGUI()
     {
@@ -58,7 +67,8 @@ public class GO_inspector : Editor {
         //// MOVETYPES
         /////////////
         EditorGUILayout.LabelField("MOVETYPES", EditorStyles.boldLabel);
-        // Time regulated
+        // Translation
+        EditorGUILayout.LabelField("Translation", EditorStyles.boldLabel);
         EditorGUILayout.LabelField("  By Time or Speed");
         _move_type_choiceIndex = EditorGUILayout.Popup(_move_type_choiceIndex, _move_type_choices);
         someClass.MoveType = _move_type_choices[_move_type_choiceIndex];
@@ -67,13 +77,47 @@ public class GO_inspector : Editor {
         {
             case "Time":
                 someClass.MoveTime = EditorGUILayout.FloatField(" MoveTime:", someClass.MoveTime);
+                someClass.value = someClass.MoveTime;
                 break;
             case "Speed":
                 EditorGUILayout.LabelField(" Speed Function");
                 _speed_fct_choiceIndex = EditorGUILayout.Popup(_speed_fct_choiceIndex, _speed_fct_choices);
                 someClass.SpeedFct = _speed_fct_choices[_speed_fct_choiceIndex];
                 someClass.Speed = EditorGUILayout.FloatField(" Speed:", someClass.Speed);
+                someClass.value = someClass.Speed;
                 break;
+        }
+
+        
+        RotTranslSyncBtn = EditorGUILayout.Toggle("Sync Translation and Rotation", RotTranslSyncBtn);
+        if (!RotTranslSyncBtn)
+        {
+            // Rotation
+            EditorGUILayout.LabelField("Rotation", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("  By Time or Speed");
+            _rotation_type_choiceIndex = EditorGUILayout.Popup(_rotation_type_choiceIndex, _rotation_type_choices);
+            someClass.RotationType = _rotation_type_choices[_rotation_type_choiceIndex];
+
+            switch (someClass.RotationType)
+            {
+                case "Time":
+                    someClass.RotationTime = EditorGUILayout.FloatField(" RotationTime:", someClass.RotationTime);
+                    break;
+                case "Speed":
+                    EditorGUILayout.LabelField(" Rotation Speed Function");
+                    _rotationspeed_fct_choiceIndex = EditorGUILayout.Popup(_rotationspeed_fct_choiceIndex, _rotationspeed_fct_choices);
+                    someClass.RotationSpeedFct = _rotationspeed_fct_choices[_rotationspeed_fct_choiceIndex];
+                    someClass.RotationSpeed = EditorGUILayout.FloatField(" Speed:", someClass.RotationSpeed);
+                    break;
+            }
+
+        }
+        else
+        {
+            someClass.RotationType = someClass.MoveType;
+            someClass.RotationTime = someClass.RotationTime;
+            someClass.RotationSpeedFct = someClass.SpeedFct;
+            someClass.RotationSpeed = someClass.Speed;
         }
 
 

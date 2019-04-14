@@ -1,0 +1,263 @@
+{
+    "GameObjectList": [
+        {
+            "name": "sheep",
+            "scale": {
+                "x": 1.6235400438308716,
+                "y": 1.5412684679031373,
+                "z": 1.0
+            },
+            "position": {
+                "x": 25.568815231323243,
+                "y": 10.267950057983399,
+                "z": -0.3601562976837158
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.008727774024009705,
+                "z": 0.0,
+                "w": 0.9999619126319885
+            },
+            "go_ID": 83165280,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "sheep",
+            "scale": {
+                "x": 1.6235405206680298,
+                "y": 1.5412684679031373,
+                "z": 1.0
+            },
+            "position": {
+                "x": 7.46881628036499,
+                "y": 2.66795015335083,
+                "z": -1.83984375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 68381578,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "ingenous",
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "position": {
+                "x": 21.868816375732423,
+                "y": 3.367950439453125,
+                "z": -1.83984375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 92326199,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "ingenous",
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "position": {
+                "x": 18.16881561279297,
+                "y": 9.367950439453125,
+                "z": 0.0
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 57366967,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "ingenous",
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "position": {
+                "x": -25.83118438720703,
+                "y": -2.5320498943328859,
+                "z": -1.83984375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": -0.4175584018230438,
+                "w": 0.9086501002311707
+            },
+            "go_ID": 73400233,
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        }
+    ],
+    "sceneSettings": {
+        "camera_pos": {
+            "x": 2.3299999237060549,
+            "y": 0.20000000298023225,
+            "z": -14.949999809265137
+        },
+        "camera_rot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "camera_fieldOfView": 0.0,
+        "skybox_name": "",
+        "sky_box_rot": {
+            "e00": 0.0,
+            "e01": 0.0,
+            "e02": 0.0,
+            "e03": 0.0,
+            "e10": 0.0,
+            "e11": 0.0,
+            "e12": 0.0,
+            "e13": 0.0,
+            "e20": 0.0,
+            "e21": 0.0,
+            "e22": 0.0,
+            "e23": 0.0,
+            "e30": 0.0,
+            "e31": 0.0,
+            "e32": 0.0,
+            "e33": 0.0
+        },
+        "light": {
+            "instanceID": 0
+        },
+        "dummy_comp1": "",
+        "dummy_comp2": "",
+        "dummy_comp3": "",
+        "dummy_comp4": 0,
+        "dummy_comp5": 0,
+        "dummy_comp6": 0,
+        "dummy_comp7": 0.0,
+        "dummy_comp8": 0.0,
+        "dummy_comp9": 0.0
+    }
+}

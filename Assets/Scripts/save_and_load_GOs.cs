@@ -507,21 +507,30 @@ public class save_and_load_GOs : MonoBehaviour
     {
         var startpos = oldObject.position;
         Vector3 endpos = newObject.position;
+
+        Quaternion startrot = oldObject.rotation;
+        Quaternion endrot = newObject.rotation;
+
         MoveObject moveObject = new MoveObject();
+        Debug.Log("Movetype " + oldObject.gameObject.GetComponent<extra_go_params>().MoveType);
         while (true)
         {
             //yield return moveObject.Translation(oldObject, startpos, endpos, 0.5f, MoveObject.MoveType.Time);
-            yield return moveObject.Translation(oldObject, startpos, endpos, 80.0f, MoveObject.MoveType.Speed, SpeedFct: "easeInOutSine");
-            
+            yield return moveObject.Translation(oldObject, startpos, endpos, endrot, oldObject.gameObject.GetComponent<extra_go_params>().value, oldObject.gameObject.GetComponent<extra_go_params>().MoveType, oldObject.gameObject.GetComponent<extra_go_params>().SpeedFct);
+            //yield return moveObject.Rotation(oldObject, startrot, endrot, oldObject.gameObject.GetComponent<extra_go_params>().RotationTime, oldObject.gameObject.GetComponent<extra_go_params>().RotationType, oldObject.gameObject.GetComponent<extra_go_params>().RotationSpeedFct);
+            //yield return moveObject.Rotation_old(Transform thisTransform, Vector3 degrees, float time);
+
+            //Rotation_old(Transform thisTransform, Vector3 degrees, float time)
             //yield return StartCoroutine(MoveObject(oldObject, startpos, endpos, 0.5f));
 
             //yield return StartCoroutine(MoveObject(oldObject, endpos, startpos, 3.0f));
             //yield return StartCoroutine(MoveObject(oldObject.transform, pointB, pointA, 3.0f));
             break;
         }
-    }
 
-    IEnumerator BlobAppear(GameObject go)
+
+    }
+        IEnumerator BlobAppear(GameObject go)
     {
         
         //float endscale_f = 20.01f;
@@ -581,8 +590,109 @@ public class save_and_load_GOs : MonoBehaviour
             yield return null;
         }
     }
-    
 
+    public class MoveObject : MonoBehaviour
+    {
+        // this class is from: http://wiki.unity3d.com/index.php/MoveObject
+        public enum MoveType { Time, Speed };
+        public static MoveObject use = null;
+
+        void Awake()
+        {
+            if (use)
+            {
+                Debug.LogWarning("Only one instance of the MoveObject script in a scene is allowed");
+                return;
+            }
+            use = this;
+        }
+
+        public IEnumerator TranslateTo(Transform thisTransform, Vector3 endPos, float value, string moveType)
+        {
+            //yield return Translation(thisTransform, thisTransform.position, endPos, value, moveType);
+            yield return 0;
+        }
+
+        public IEnumerator Translation(Transform thisTransform, Vector3 endPos, float value, string moveType)
+        {
+            //yield return Translation(thisTransform, thisTransform.position, thisTransform.position + endPos, value, moveType);
+            yield return 0;
+        }
+
+
+        public IEnumerator Translation(Transform thisTransform, Vector3 startPos, Vector3 endPos, Quaternion endRotation, float value, string moveType, string SpeedFct = "linear")
+        {
+            // float rate = ... was here before, but want it to make time dependend. 
+            Quaternion startRotation = thisTransform.rotation;
+            float t = 0.0f;
+            while (t < 1.0)
+            {
+                if (moveType == "Speed")
+                {
+                    switch (SpeedFct)
+                    {
+                        case "linear":
+                            value = value;
+                            break;
+                        case "easInOutSine":
+                            value = value*(1.0f + (float)Math.Sin((float)Math.PI * t - (float)Math.PI / 2.0f)) / 2.0f;
+                            break;
+                            //
+                    }
+                }
+                float rate = (moveType == "Time") ? 1.0f / value : 1.0f / Vector3.Distance(startPos, endPos) * value;
+                t += Time.deltaTime * rate;
+                thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
+                thisTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+                yield return null;
+            }
+        }
+
+
+        public IEnumerator Rotation(Transform thisTransform, Quaternion startRotation, Quaternion endRotation, float value, string moveType, string SpeedFct = "linear")
+        {
+            startRotation = thisTransform.rotation;
+            //Quaternion endRotation = thisTransform.rotation * Quaternion.Euler(degrees);
+            float t = 0.0f;
+            while (t < 1.0)
+            {
+                if (moveType == "Speed")
+                {
+                    switch (SpeedFct)
+                    {
+                        case "linear":
+                            value = value;
+                            break;
+                        case "easInOutSine":
+                            value = (1.0f + (float)Math.Sin((float)Math.PI * t - (float)Math.PI / 2.0f)) / 2.0f;
+                            break;
+                            //
+                    }
+                }
+                float rate = (moveType == "Time") ? 1.0f / value : 1.0f / Quaternion.Angle(startRotation, endRotation) * value;
+                t += Time.deltaTime * 0.3f; //rate;
+                //thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
+                thisTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+                yield return null;
+            }
+        }
+
+
+
+        public IEnumerator Rotation_old(Transform thisTransform, Vector3 degrees, float time)
+        {
+            Quaternion startRotation = thisTransform.rotation;
+            Quaternion endRotation = thisTransform.rotation * Quaternion.Euler(degrees);
+            float rate = 1.0f / time;
+            float t = 0.0f;
+            while (t < 1.0f)
+            {
+                t += Time.deltaTime * rate;
+                thisTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+                yield return null;
+            }
+        }
+    }
 
 
 }
@@ -629,6 +739,14 @@ public class OwnGameObjectClass
     public int dummy_component4;
     public double dummy_component5;
     public bool dummy_component6;
+
+    // extra_go_params
+    public string Appear_Sound, Move_Sound, Disappear_Sound;
+    public string SpeedFct, RotationType, RotationSpeedFct;
+    public float MoveTime, Speed, RotationTime, RotationSpeed;
+
+    public int LayerNum;
+    public bool Sync;
 
 
     public OwnGameObjectClass(string name, Vector3 scale, Vector3 position, Quaternion rotation)
@@ -689,71 +807,7 @@ public class SceneSettings
 
 
 
-public class MoveObject : MonoBehaviour
-{
 
-    public enum MoveType { Time, Speed }
-    public static MoveObject use = null;
-
-    void Awake()
-    {
-        if (use)
-        {
-            Debug.LogWarning("Only one instance of the MoveObject script in a scene is allowed");
-            return;
-        }
-        use = this;
-    }
-
-    public IEnumerator TranslateTo(Transform thisTransform, Vector3 endPos, float value, MoveType moveType)
-    {
-        yield return Translation(thisTransform, thisTransform.position, endPos, value, moveType);
-    }
-
-    public IEnumerator Translation(Transform thisTransform, Vector3 endPos, float value, MoveType moveType)
-    {
-        yield return Translation(thisTransform, thisTransform.position, thisTransform.position + endPos, value, moveType);
-    }
-
-    public IEnumerator Translation(Transform thisTransform, Vector3 startPos, Vector3 endPos, float value, MoveType moveType, string SpeedFct = "linear")
-    {
-        // float rate = ... was here before, but want it to make time dependend. 
-        float t = 0.0f;
-        while (t < 1.0)
-        {
-            if(moveType == MoveType.Speed)
-            {
-                switch(SpeedFct)
-                {
-                    case "linear":
-                        value = value;
-                        break;
-                    case "easInOutSine":
-                        value = (1.0f + (float)Math.Sin((float)Math.PI * t - (float)Math.PI / 2.0f)) / 2.0f;
-                        break;
-                }
-            }
-            float rate = (moveType == MoveType.Time) ? 1.0f / value : 1.0f / Vector3.Distance(startPos, endPos) * value;
-            t += Time.deltaTime * rate;
-            thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
-            yield return null;
-        }
-    }
-
-    public IEnumerator Rotation(Transform thisTransform, Vector3 degrees, float time)
-    {
-        Quaternion startRotation = thisTransform.rotation;
-        Quaternion endRotation = thisTransform.rotation * Quaternion.Euler(degrees);
-        float rate = 1.0f / time;
-        float t = 0.0f;
-        while (t < 1.0f)
-        {
-            t += Time.deltaTime * rate;
-            thisTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
-            yield return null;
-        }
-    }
-}
 
 
 
