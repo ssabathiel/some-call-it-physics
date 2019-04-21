@@ -30,7 +30,8 @@ public class GO_inspector : Editor {
 
 
     bool RotTranslSyncBtn = true;
-
+    bool foldout_sound = false;
+    bool foldout_move = false;
 
     public override void OnInspectorGUI()
     {
@@ -43,21 +44,39 @@ public class GO_inspector : Editor {
         /////////////
         //// SOUNDS
         /////////////
-        EditorGUILayout.LabelField("Sounds", EditorStyles.boldLabel);
-        // Appear sounds
-        EditorGUILayout.LabelField("  Appear Sound:");
-        _appear_choiceIndex = EditorGUILayout.Popup(_appear_choiceIndex, _appear_sound_choices);
-        someClass.Appear_Sound = _appear_sound_choices[_appear_choiceIndex];
+        ///
+        EditorGUI.BeginChangeCheck ();
+        EditorGUILayout.GetControlRect(true, 16f, EditorStyles.foldout);
+        Rect foldRect = GUILayoutUtility.GetLastRect();
+        
+        if (Event.current.type == EventType.MouseUp && foldRect.Contains(Event.current.mousePosition))
+        {
+            foldout_sound = !foldout_sound;
+            GUI.changed = true;
+            Event.current.Use();
+        }
 
-        // Move sounds
-        EditorGUILayout.LabelField("  Move Sound:");
-        _move_choiceIndex = EditorGUILayout.Popup(_move_choiceIndex, _move_sound_choices);
-        someClass.Move_Sound = _move_sound_choices[_move_choiceIndex];
+        foldout_sound = EditorGUI.Foldout(foldRect, foldout_sound, "Sounds");
+        if (foldout_sound)
+        {
+            //EditorGUILayout.LabelField("Sounds", EditorStyles.boldLabel);
+            // Appear sounds
+            EditorGUILayout.LabelField("  Appear Sound:");
+            _appear_choiceIndex = EditorGUILayout.Popup(_appear_choiceIndex, _appear_sound_choices);
+            someClass.Appear_Sound = _appear_sound_choices[_appear_choiceIndex];
+            
 
-        // Disappear sounds
-        EditorGUILayout.LabelField("  Disappear Sound:");
-        _disappear_choiceIndex = EditorGUILayout.Popup(_disappear_choiceIndex, _disappear_sound_choices);
-        someClass.Disappear_Sound = _disappear_sound_choices[_disappear_choiceIndex];
+            // Move sounds
+            EditorGUILayout.LabelField("  Move Sound:");
+            _move_choiceIndex = EditorGUILayout.Popup(_move_choiceIndex, _move_sound_choices);
+            someClass.Move_Sound = _move_sound_choices[_move_choiceIndex];
+
+            // Disappear sounds
+            EditorGUILayout.LabelField("  Disappear Sound:");
+            _disappear_choiceIndex = EditorGUILayout.Popup(_disappear_choiceIndex, _disappear_sound_choices);
+            someClass.Disappear_Sound = _disappear_sound_choices[_disappear_choiceIndex];
+        }
+
 
 
 
@@ -66,61 +85,74 @@ public class GO_inspector : Editor {
         /////////////
         //// MOVETYPES
         /////////////
-        EditorGUILayout.LabelField("MOVETYPES", EditorStyles.boldLabel);
-        // Translation
-        EditorGUILayout.LabelField("Translation", EditorStyles.boldLabel);
-        EditorGUILayout.LabelField("  By Time or Speed");
-        _move_type_choiceIndex = EditorGUILayout.Popup(_move_type_choiceIndex, _move_type_choices);
-        someClass.MoveType = _move_type_choices[_move_type_choiceIndex];
-
-        switch (someClass.MoveType)
+        EditorGUI.BeginChangeCheck();
+        EditorGUILayout.GetControlRect(true, 16f, EditorStyles.foldout);
+        Rect foldRect_move = GUILayoutUtility.GetLastRect();
+        if (Event.current.type == EventType.MouseUp && foldRect_move.Contains(Event.current.mousePosition))
         {
-            case "Time":
-                someClass.MoveTime = EditorGUILayout.FloatField(" MoveTime:", someClass.MoveTime);
-                someClass.value = someClass.MoveTime;
-                break;
-            case "Speed":
-                EditorGUILayout.LabelField(" Speed Function");
-                _speed_fct_choiceIndex = EditorGUILayout.Popup(_speed_fct_choiceIndex, _speed_fct_choices);
-                someClass.SpeedFct = _speed_fct_choices[_speed_fct_choiceIndex];
-                someClass.Speed = EditorGUILayout.FloatField(" Speed:", someClass.Speed);
-                someClass.value = someClass.Speed;
-                break;
+            foldout_move = !foldout_move;
+            GUI.changed = true;
+            Event.current.Use();
         }
 
-        
-        RotTranslSyncBtn = EditorGUILayout.Toggle("Sync Translation and Rotation", RotTranslSyncBtn);
-        if (!RotTranslSyncBtn)
+        foldout_move = EditorGUI.Foldout(foldRect_move, foldout_move, "Move");
+        if (foldout_move)
         {
-            // Rotation
-            EditorGUILayout.LabelField("Rotation", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("MOVETYPES", EditorStyles.boldLabel);
+            // Translation
+            EditorGUILayout.LabelField("Translation", EditorStyles.boldLabel);
             EditorGUILayout.LabelField("  By Time or Speed");
-            _rotation_type_choiceIndex = EditorGUILayout.Popup(_rotation_type_choiceIndex, _rotation_type_choices);
-            someClass.RotationType = _rotation_type_choices[_rotation_type_choiceIndex];
+            _move_type_choiceIndex = EditorGUILayout.Popup(_move_type_choiceIndex, _move_type_choices);
+            someClass.MoveType = _move_type_choices[_move_type_choiceIndex];
 
-            switch (someClass.RotationType)
+            switch (someClass.MoveType)
             {
                 case "Time":
-                    someClass.RotationTime = EditorGUILayout.FloatField(" RotationTime:", someClass.RotationTime);
+                    someClass.MoveTime = EditorGUILayout.FloatField(" MoveTime:", someClass.MoveTime);
+                    someClass.value = someClass.MoveTime;
                     break;
                 case "Speed":
-                    EditorGUILayout.LabelField(" Rotation Speed Function");
-                    _rotationspeed_fct_choiceIndex = EditorGUILayout.Popup(_rotationspeed_fct_choiceIndex, _rotationspeed_fct_choices);
-                    someClass.RotationSpeedFct = _rotationspeed_fct_choices[_rotationspeed_fct_choiceIndex];
-                    someClass.RotationSpeed = EditorGUILayout.FloatField(" Speed:", someClass.RotationSpeed);
+                    EditorGUILayout.LabelField(" Speed Function");
+                    _speed_fct_choiceIndex = EditorGUILayout.Popup(_speed_fct_choiceIndex, _speed_fct_choices);
+                    someClass.SpeedFct = _speed_fct_choices[_speed_fct_choiceIndex];
+                    someClass.Speed = EditorGUILayout.FloatField(" Speed:", someClass.Speed);
+                    someClass.value = someClass.Speed;
                     break;
             }
 
-        }
-        else
-        {
-            someClass.RotationType = someClass.MoveType;
-            someClass.RotationTime = someClass.RotationTime;
-            someClass.RotationSpeedFct = someClass.SpeedFct;
-            someClass.RotationSpeed = someClass.Speed;
-        }
 
+            RotTranslSyncBtn = EditorGUILayout.Toggle("Sync Transl & Rot", RotTranslSyncBtn);
+            if (!RotTranslSyncBtn)
+            {
+                // Rotation
+                EditorGUILayout.LabelField("Rotation", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField("  By Time or Speed");
+                _rotation_type_choiceIndex = EditorGUILayout.Popup(_rotation_type_choiceIndex, _rotation_type_choices);
+                someClass.RotationType = _rotation_type_choices[_rotation_type_choiceIndex];
 
+                switch (someClass.RotationType)
+                {
+                    case "Time":
+                        someClass.RotationTime = EditorGUILayout.FloatField(" RotationTime:", someClass.RotationTime);
+                        break;
+                    case "Speed":
+                        EditorGUILayout.LabelField(" Rotation Speed Function");
+                        _rotationspeed_fct_choiceIndex = EditorGUILayout.Popup(_rotationspeed_fct_choiceIndex, _rotationspeed_fct_choices);
+                        someClass.RotationSpeedFct = _rotationspeed_fct_choices[_rotationspeed_fct_choiceIndex];
+                        someClass.RotationSpeed = EditorGUILayout.FloatField(" Speed:", someClass.RotationSpeed);
+                        break;
+                }
+
+            }
+            else
+            {
+                someClass.RotationType = someClass.MoveType;
+                someClass.RotationTime = someClass.RotationTime;
+                someClass.RotationSpeedFct = someClass.SpeedFct;
+                someClass.RotationSpeed = someClass.Speed;
+            }
+
+        } // END Move Foldout
 
         // Save the changes back to the object
         EditorUtility.SetDirty(target);

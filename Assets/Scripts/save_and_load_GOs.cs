@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using UnityEngine.UI;
+using System.Reflection;
 
 [RequireComponent(typeof(AudioSource))]
 public class save_and_load_GOs : MonoBehaviour
@@ -27,11 +28,62 @@ public class save_and_load_GOs : MonoBehaviour
 
     void Awake()
     {
+
     }
 
     void Start()
     {
+        GameObject Protagonists = GameObject.Find("Protagonists");
+        print("Protagonists[0].name: " + Protagonists.transform.GetChild(0).name);
+        //var info = typeof(ParticleSystem).GetProperties();
+        //var info2 = Protagonists.transform.GetChild(0).GetComponent(typeof(info[0]));
+        foreach (var component in Protagonists.transform.GetChild(0).GetComponents<Component>())
+        {
+            print("Component: " + component);
+            //var info = typeof(component.GetType().GetFields()).GetProperties();
+            //Type typy = component.GetType();
+            //var info = typeof(component).GetProperties();
 
+            //Debug.Log(component.GetType());
+            //print("Particle System Props: " + info[0]);
+
+            /*
+            foreach (FieldInfo fi in component.GetType().GetFields())
+            {
+                System.Object obj = (System.Object)component;
+                Debug.Log("fi name " + fi.Name + " val " + fi.GetValue(obj));
+            }
+            */
+
+            //List<PropertyInfo> properties = component.GetType().GetProperties();
+            foreach(PropertyInfo property in component.GetType().GetProperties())
+            {
+                    //Debug.Log("property: " + property);
+                    if (!property.IsDefined(typeof(ObsoleteAttribute), true))
+                    {
+                        object propertyValue = property.GetValue(component, null);
+                        //Debug.Log("Property Value: " + propertyValue);
+                    }
+                        
+                //object theRealObject = property.GetValue(component);
+                //Debug.Log("")
+
+            }
+
+
+            /*
+            PropertyInfo[] propertysProperties = theRealObject.GetType().GetProperties().Where(t => t.GetCustomAttributes<ListableAttribute>().Count() > 0);
+            foreach (PropertyInfo p in propertysProperties)
+            {
+                Debug.Log("VALUE: " + p.GetValue(theRealObject));
+
+
+
+            }
+            */
+            
+        }
+        
     }
 
     void OnGUI()
@@ -455,6 +507,8 @@ public class save_and_load_GOs : MonoBehaviour
         GO.transform.position = own_GO.position;
         GO.transform.rotation = own_GO.rotation;
         GO.transform.parent = parenty.transform;
+
+        
 
         // ID
         GO.gameObject.GetComponent<extra_go_params>().go_ID_ = own_GO.go_ID;
