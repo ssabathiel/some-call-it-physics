@@ -1,0 +1,1286 @@
+{
+    "GameObjectList": [
+        {
+            "name": "sheep",
+            "scale": {
+                "x": 1.6235402822494507,
+                "y": 1.5412684679031373,
+                "z": 1.0
+            },
+            "position": {
+                "x": 25.568815231323243,
+                "y": 10.267950057983399,
+                "z": -0.3601562976837158
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 83165280,
+            "components": [
+                {
+                    "name": "UnityEngine.Transform",
+                    "properties": [
+                        {
+                            "name": "position",
+                            "value": "(25,6, 10,3, -0,4)"
+                        },
+                        {
+                            "name": "localPosition",
+                            "value": "(32,8, 11,2, -2,2)"
+                        },
+                        {
+                            "name": "eulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "localEulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "right",
+                            "value": "(1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "up",
+                            "value": "(0,0, 1,0, 0,0)"
+                        },
+                        {
+                            "name": "forward",
+                            "value": "(0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "rotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localRotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localScale",
+                            "value": "(1,6, 1,5, 1,0)"
+                        },
+                        {
+                            "name": "parent",
+                            "value": "Protagonists (UnityEngine.Transform)"
+                        },
+                        {
+                            "name": "hasChanged",
+                            "value": "True"
+                        },
+                        {
+                            "name": "hierarchyCapacity",
+                            "value": "5"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.SpriteRenderer",
+                    "properties": [
+                        {
+                            "name": "sprite",
+                            "value": "sheep (UnityEngine.Sprite)"
+                        },
+                        {
+                            "name": "drawMode",
+                            "value": "Simple"
+                        },
+                        {
+                            "name": "size",
+                            "value": "(2,5, 1,8)"
+                        },
+                        {
+                            "name": "adaptiveModeThreshold",
+                            "value": "0,5"
+                        },
+                        {
+                            "name": "tileMode",
+                            "value": "Continuous"
+                        },
+                        {
+                            "name": "color",
+                            "value": "RGBA(1,000, 1,000, 1,000, 1,000)"
+                        },
+                        {
+                            "name": "flipX",
+                            "value": "False"
+                        },
+                        {
+                            "name": "flipY",
+                            "value": "False"
+                        },
+                        {
+                            "name": "maskInteraction",
+                            "value": "None"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "shadowCastingMode",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "receiveShadows",
+                            "value": "False"
+                        },
+                        {
+                            "name": "motionVectorGenerationMode",
+                            "value": "Object"
+                        },
+                        {
+                            "name": "lightProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "reflectionProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "sortingLayerName",
+                            "value": "Default"
+                        },
+                        {
+                            "name": "sortingLayerID",
+                            "value": "0"
+                        },
+                        {
+                            "name": "sortingOrder",
+                            "value": "0"
+                        },
+                        {
+                            "name": "allowOcclusionWhenDynamic",
+                            "value": "True"
+                        },
+                        {
+                            "name": "lightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "realtimeLightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "lightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "realtimeLightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "material",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "sharedMaterial",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "materials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "sharedMaterials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "extra_go_params",
+                    "properties": [
+                        {
+                            "name": "useGUILayout",
+                            "value": "True"
+                        },
+                        {
+                            "name": "runInEditMode",
+                            "value": "False"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.ParticleSystem",
+                    "properties": [
+                        {
+                            "name": "time",
+                            "value": "0"
+                        },
+                        {
+                            "name": "randomSeed",
+                            "value": "3675246159"
+                        },
+                        {
+                            "name": "useAutoRandomSeed",
+                            "value": "False"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.ParticleSystemRenderer",
+                    "properties": [
+                        {
+                            "name": "renderMode",
+                            "value": "Billboard"
+                        },
+                        {
+                            "name": "lengthScale",
+                            "value": "2"
+                        },
+                        {
+                            "name": "velocityScale",
+                            "value": "0"
+                        },
+                        {
+                            "name": "cameraVelocityScale",
+                            "value": "0"
+                        },
+                        {
+                            "name": "normalDirection",
+                            "value": "1"
+                        },
+                        {
+                            "name": "alignment",
+                            "value": "View"
+                        },
+                        {
+                            "name": "pivot",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "sortMode",
+                            "value": "None"
+                        },
+                        {
+                            "name": "sortingFudge",
+                            "value": "0"
+                        },
+                        {
+                            "name": "minParticleSize",
+                            "value": "0"
+                        },
+                        {
+                            "name": "maxParticleSize",
+                            "value": "0,5"
+                        },
+                        {
+                            "name": "maskInteraction",
+                            "value": "None"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "shadowCastingMode",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "receiveShadows",
+                            "value": "False"
+                        },
+                        {
+                            "name": "motionVectorGenerationMode",
+                            "value": "Object"
+                        },
+                        {
+                            "name": "lightProbeUsage",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "reflectionProbeUsage",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "sortingLayerName",
+                            "value": "Default"
+                        },
+                        {
+                            "name": "sortingLayerID",
+                            "value": "0"
+                        },
+                        {
+                            "name": "sortingOrder",
+                            "value": "0"
+                        },
+                        {
+                            "name": "allowOcclusionWhenDynamic",
+                            "value": "True"
+                        },
+                        {
+                            "name": "lightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "realtimeLightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "lightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "realtimeLightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "material",
+                            "value": "Default-Material (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "sharedMaterial",
+                            "value": "Default-Material (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "materials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "sharedMaterials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                }
+            ],
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "sheep",
+            "scale": {
+                "x": 1.6235405206680298,
+                "y": 1.5412684679031373,
+                "z": 1.0
+            },
+            "position": {
+                "x": 7.46881628036499,
+                "y": 2.66795015335083,
+                "z": -1.83984375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 68381578,
+            "components": [
+                {
+                    "name": "UnityEngine.Transform",
+                    "properties": [
+                        {
+                            "name": "position",
+                            "value": "(7,5, 2,7, -1,8)"
+                        },
+                        {
+                            "name": "localPosition",
+                            "value": "(14,7, 3,6, -3,7)"
+                        },
+                        {
+                            "name": "eulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "localEulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "right",
+                            "value": "(1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "up",
+                            "value": "(0,0, 1,0, 0,0)"
+                        },
+                        {
+                            "name": "forward",
+                            "value": "(0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "rotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localRotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localScale",
+                            "value": "(1,6, 1,5, 1,0)"
+                        },
+                        {
+                            "name": "parent",
+                            "value": "Protagonists (UnityEngine.Transform)"
+                        },
+                        {
+                            "name": "hasChanged",
+                            "value": "True"
+                        },
+                        {
+                            "name": "hierarchyCapacity",
+                            "value": "5"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.SpriteRenderer",
+                    "properties": [
+                        {
+                            "name": "sprite",
+                            "value": "sheep (UnityEngine.Sprite)"
+                        },
+                        {
+                            "name": "drawMode",
+                            "value": "Simple"
+                        },
+                        {
+                            "name": "size",
+                            "value": "(2,5, 1,8)"
+                        },
+                        {
+                            "name": "adaptiveModeThreshold",
+                            "value": "0,5"
+                        },
+                        {
+                            "name": "tileMode",
+                            "value": "Continuous"
+                        },
+                        {
+                            "name": "color",
+                            "value": "RGBA(1,000, 1,000, 1,000, 1,000)"
+                        },
+                        {
+                            "name": "flipX",
+                            "value": "False"
+                        },
+                        {
+                            "name": "flipY",
+                            "value": "False"
+                        },
+                        {
+                            "name": "maskInteraction",
+                            "value": "None"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "shadowCastingMode",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "receiveShadows",
+                            "value": "False"
+                        },
+                        {
+                            "name": "motionVectorGenerationMode",
+                            "value": "Object"
+                        },
+                        {
+                            "name": "lightProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "reflectionProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "sortingLayerName",
+                            "value": "Default"
+                        },
+                        {
+                            "name": "sortingLayerID",
+                            "value": "0"
+                        },
+                        {
+                            "name": "sortingOrder",
+                            "value": "0"
+                        },
+                        {
+                            "name": "allowOcclusionWhenDynamic",
+                            "value": "True"
+                        },
+                        {
+                            "name": "lightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "realtimeLightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "lightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "realtimeLightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "material",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "sharedMaterial",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "materials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "sharedMaterials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "extra_go_params",
+                    "properties": [
+                        {
+                            "name": "useGUILayout",
+                            "value": "True"
+                        },
+                        {
+                            "name": "runInEditMode",
+                            "value": "False"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "sheep"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                }
+            ],
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "ingenous",
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "position": {
+                "x": 21.868816375732423,
+                "y": 3.367950439453125,
+                "z": -1.83984375
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 92326199,
+            "components": [
+                {
+                    "name": "UnityEngine.Transform",
+                    "properties": [
+                        {
+                            "name": "position",
+                            "value": "(21,9, 3,4, -1,8)"
+                        },
+                        {
+                            "name": "localPosition",
+                            "value": "(29,1, 4,3, -3,7)"
+                        },
+                        {
+                            "name": "eulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "localEulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "right",
+                            "value": "(1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "up",
+                            "value": "(0,0, 1,0, 0,0)"
+                        },
+                        {
+                            "name": "forward",
+                            "value": "(0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "rotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localRotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localScale",
+                            "value": "(1,0, 1,0, 1,0)"
+                        },
+                        {
+                            "name": "parent",
+                            "value": "Protagonists (UnityEngine.Transform)"
+                        },
+                        {
+                            "name": "hasChanged",
+                            "value": "True"
+                        },
+                        {
+                            "name": "hierarchyCapacity",
+                            "value": "5"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.SpriteRenderer",
+                    "properties": [
+                        {
+                            "name": "sprite",
+                            "value": "ingenous (UnityEngine.Sprite)"
+                        },
+                        {
+                            "name": "drawMode",
+                            "value": "Simple"
+                        },
+                        {
+                            "name": "size",
+                            "value": "(4,3, 4,5)"
+                        },
+                        {
+                            "name": "adaptiveModeThreshold",
+                            "value": "0,5"
+                        },
+                        {
+                            "name": "tileMode",
+                            "value": "Continuous"
+                        },
+                        {
+                            "name": "color",
+                            "value": "RGBA(1,000, 1,000, 1,000, 1,000)"
+                        },
+                        {
+                            "name": "flipX",
+                            "value": "False"
+                        },
+                        {
+                            "name": "flipY",
+                            "value": "False"
+                        },
+                        {
+                            "name": "maskInteraction",
+                            "value": "None"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "shadowCastingMode",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "receiveShadows",
+                            "value": "False"
+                        },
+                        {
+                            "name": "motionVectorGenerationMode",
+                            "value": "Object"
+                        },
+                        {
+                            "name": "lightProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "reflectionProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "sortingLayerName",
+                            "value": "Default"
+                        },
+                        {
+                            "name": "sortingLayerID",
+                            "value": "0"
+                        },
+                        {
+                            "name": "sortingOrder",
+                            "value": "0"
+                        },
+                        {
+                            "name": "allowOcclusionWhenDynamic",
+                            "value": "True"
+                        },
+                        {
+                            "name": "lightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "realtimeLightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "lightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "realtimeLightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "material",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "sharedMaterial",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "materials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "sharedMaterials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "extra_go_params",
+                    "properties": [
+                        {
+                            "name": "useGUILayout",
+                            "value": "True"
+                        },
+                        {
+                            "name": "runInEditMode",
+                            "value": "False"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                }
+            ],
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        },
+        {
+            "name": "ingenous",
+            "scale": {
+                "x": 1.0,
+                "y": 1.0,
+                "z": 1.0
+            },
+            "position": {
+                "x": 18.16881561279297,
+                "y": 9.367950439453125,
+                "z": 0.0
+            },
+            "rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            },
+            "go_ID": 57366967,
+            "components": [
+                {
+                    "name": "UnityEngine.Transform",
+                    "properties": [
+                        {
+                            "name": "position",
+                            "value": "(18,2, 9,4, 0,0)"
+                        },
+                        {
+                            "name": "localPosition",
+                            "value": "(25,4, 10,3, -1,8)"
+                        },
+                        {
+                            "name": "eulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "localEulerAngles",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "right",
+                            "value": "(1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "up",
+                            "value": "(0,0, 1,0, 0,0)"
+                        },
+                        {
+                            "name": "forward",
+                            "value": "(0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "rotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localRotation",
+                            "value": "(0,0, 0,0, 0,0, 1,0)"
+                        },
+                        {
+                            "name": "localScale",
+                            "value": "(1,0, 1,0, 1,0)"
+                        },
+                        {
+                            "name": "parent",
+                            "value": "Protagonists (UnityEngine.Transform)"
+                        },
+                        {
+                            "name": "hasChanged",
+                            "value": "True"
+                        },
+                        {
+                            "name": "hierarchyCapacity",
+                            "value": "5"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.SpriteRenderer",
+                    "properties": [
+                        {
+                            "name": "sprite",
+                            "value": "ingenous (UnityEngine.Sprite)"
+                        },
+                        {
+                            "name": "drawMode",
+                            "value": "Simple"
+                        },
+                        {
+                            "name": "size",
+                            "value": "(4,3, 4,5)"
+                        },
+                        {
+                            "name": "adaptiveModeThreshold",
+                            "value": "0,5"
+                        },
+                        {
+                            "name": "tileMode",
+                            "value": "Continuous"
+                        },
+                        {
+                            "name": "color",
+                            "value": "RGBA(1,000, 1,000, 1,000, 1,000)"
+                        },
+                        {
+                            "name": "flipX",
+                            "value": "False"
+                        },
+                        {
+                            "name": "flipY",
+                            "value": "False"
+                        },
+                        {
+                            "name": "maskInteraction",
+                            "value": "None"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "shadowCastingMode",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "receiveShadows",
+                            "value": "False"
+                        },
+                        {
+                            "name": "motionVectorGenerationMode",
+                            "value": "Object"
+                        },
+                        {
+                            "name": "lightProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "reflectionProbeUsage",
+                            "value": "BlendProbes"
+                        },
+                        {
+                            "name": "sortingLayerName",
+                            "value": "Default"
+                        },
+                        {
+                            "name": "sortingLayerID",
+                            "value": "0"
+                        },
+                        {
+                            "name": "sortingOrder",
+                            "value": "0"
+                        },
+                        {
+                            "name": "allowOcclusionWhenDynamic",
+                            "value": "True"
+                        },
+                        {
+                            "name": "lightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "realtimeLightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "lightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "realtimeLightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "material",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "sharedMaterial",
+                            "value": "Sprites-Default (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "materials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "sharedMaterials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "extra_go_params",
+                    "properties": [
+                        {
+                            "name": "useGUILayout",
+                            "value": "True"
+                        },
+                        {
+                            "name": "runInEditMode",
+                            "value": "False"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                }
+            ],
+            "transition_style": "",
+            "transition_style2": "",
+            "animation_style": "",
+            "animation_style2": "",
+            "animation_style3": "",
+            "dummy_component1": "",
+            "dummy_component2": "",
+            "dummy_component3": 0,
+            "dummy_component4": 0,
+            "dummy_component5": 0.0,
+            "dummy_component6": false,
+            "Appear_Sound": "",
+            "Move_Sound": "",
+            "Disappear_Sound": "",
+            "SpeedFct": "",
+            "RotationType": "",
+            "RotationSpeedFct": "",
+            "MoveTime": 0.0,
+            "Speed": 0.0,
+            "RotationTime": 0.0,
+            "RotationSpeed": 0.0,
+            "LayerNum": 0,
+            "Sync": false
+        }
+    ],
+    "sceneSettings": {
+        "camera_pos": {
+            "x": 2.3299999237060549,
+            "y": 0.20000000298023225,
+            "z": -14.949999809265137
+        },
+        "camera_rot": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        },
+        "camera_fieldOfView": 0.0,
+        "skybox_name": "",
+        "sky_box_rot": {
+            "e00": 0.0,
+            "e01": 0.0,
+            "e02": 0.0,
+            "e03": 0.0,
+            "e10": 0.0,
+            "e11": 0.0,
+            "e12": 0.0,
+            "e13": 0.0,
+            "e20": 0.0,
+            "e21": 0.0,
+            "e22": 0.0,
+            "e23": 0.0,
+            "e30": 0.0,
+            "e31": 0.0,
+            "e32": 0.0,
+            "e33": 0.0
+        },
+        "light": {
+            "instanceID": 0
+        },
+        "dummy_comp1": "",
+        "dummy_comp2": "",
+        "dummy_comp3": "",
+        "dummy_comp4": 0,
+        "dummy_comp5": 0,
+        "dummy_comp6": 0,
+        "dummy_comp7": 0.0,
+        "dummy_comp8": 0.0,
+        "dummy_comp9": 0.0
+    }
+}

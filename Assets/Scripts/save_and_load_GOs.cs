@@ -369,8 +369,8 @@ public class save_and_load_GOs : MonoBehaviour
 
         foreach (Transform gObject in Protagonists.transform)
         {
-
-            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation);
+            List<own_component> components_ = GetComponentsAndProperties(gObject.gameObject);
+            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation, components_);
 
             if (gObject.gameObject.GetComponent<extra_go_params>().go_ID_ == 0)
             {
@@ -771,7 +771,7 @@ public class save_and_load_GOs : MonoBehaviour
         }
     }
 
-    public List<own_component> GetComponentsAndProperties(GameObject go_)
+    public static List<own_component> GetComponentsAndProperties(GameObject go_)
     {
 
         List<own_component> components_ = new List<own_component>();
@@ -781,7 +781,7 @@ public class save_and_load_GOs : MonoBehaviour
 
             List<own_property> properties_ = new List<own_property>();
 
-            print("Component: " + component);
+            //print("Component: " + component);
             Type typy = component.GetType();
             object compy = go_.GetComponent(typy);
             object compy2 = go_.GetComponent("transform");
@@ -811,12 +811,15 @@ public class save_and_load_GOs : MonoBehaviour
                 {
                     object propertyValue = property.GetValue(component, null);
                     //component.GetType().GetProperty(property) = propertyValue;
-                    if(property.CanWrite)
+                    if(property.CanWrite && property.Name != null && propertyValue != null)
                     {
                         property.SetValue(compy, propertyValue);
+                        own_property property_ = new own_property(property.Name.ToString(), propertyValue.ToString());
+                        properties_.Add(property_);
+                        Debug.Log("in theree");
                     }
-                    own_property property_ = new own_property( property.Name.ToString(), propertyValue.ToString());
-                    properties_.Add(property_);
+
+                    
                     //Debug.Log("Property Value: " + propertyValue);
                     //own_property property_ = new own_property();
                 }
@@ -889,7 +892,7 @@ public class OwnGameObjectClass
     public bool Sync;
 
 
-    public OwnGameObjectClass(string name, Vector3 scale, Vector3 position, Quaternion rotation)
+    public OwnGameObjectClass(string name, Vector3 scale, Vector3 position, Quaternion rotation, List<own_component> components_)
     {
         this.name = name;
         this.scale = scale;
