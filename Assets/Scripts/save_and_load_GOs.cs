@@ -39,7 +39,13 @@ public class save_and_load_GOs : MonoBehaviour
         //var info2 = Protagonists.transform.GetChild(0).GetComponent(typeof(info[0]));
         foreach (var component in Protagonists.transform.GetChild(0).GetComponents<Component>())
         {
-            print("Component: " + component);
+            print("Component: " + component.GetType().ToString());
+            Type typy = component.GetType();
+            object compy = Protagonists.transform.GetChild(0).GetComponent(typy);
+            object compy2 = Protagonists.transform.GetChild(0).GetComponent("transform");
+
+
+
             //var info = typeof(component.GetType().GetFields()).GetProperties();
             //Type typy = component.GetType();
             //var info = typeof(component).GetProperties();
@@ -56,12 +62,19 @@ public class save_and_load_GOs : MonoBehaviour
             */
 
             //List<PropertyInfo> properties = component.GetType().GetProperties();
-            foreach(PropertyInfo property in component.GetType().GetProperties())
+            foreach (PropertyInfo property in component.GetType().GetProperties())
             {
                     //Debug.Log("property: " + property);
                     if (!property.IsDefined(typeof(ObsoleteAttribute), true))
                     {
                         object propertyValue = property.GetValue(component, null);
+                    //component.GetType().GetProperty(property) = propertyValue;
+                        /*
+                        if (property.CanWrite)
+                        {
+                            property.SetValue(compy, propertyValue);
+                        }
+                        */
                         //Debug.Log("Property Value: " + propertyValue);
                     }
                         
@@ -69,6 +82,16 @@ public class save_and_load_GOs : MonoBehaviour
                 //Debug.Log("")
 
             }
+
+
+            // PROPERTY AND PROPERTY-VALUE AS STRING TO PROPERTY AND PROPERTY-VALUE
+            /*
+            Ship ship = new Ship();
+            string value = "5.5";
+            PropertyInfo propertyInfo = ship.GetType().GetProperty("Latitude");
+            propertyInfo.SetValue(ship, Convert.ChangeType(value, propertyInfo.PropertyType), null);
+            */
+
 
 
             /*
@@ -81,7 +104,7 @@ public class save_and_load_GOs : MonoBehaviour
 
             }
             */
-            
+
         }
         
     }
@@ -748,6 +771,67 @@ public class save_and_load_GOs : MonoBehaviour
         }
     }
 
+    public List<own_component> GetComponentsAndProperties(GameObject go_)
+    {
+
+        List<own_component> components_ = new List<own_component>();
+
+        foreach (var component in go_.GetComponents<Component>())
+        {
+
+            List<own_property> properties_ = new List<own_property>();
+
+            print("Component: " + component);
+            Type typy = component.GetType();
+            object compy = go_.GetComponent(typy);
+            object compy2 = go_.GetComponent("transform");
+
+
+
+            //var info = typeof(component.GetType().GetFields()).GetProperties();
+            //Type typy = component.GetType();
+            //var info = typeof(component).GetProperties();
+
+            //Debug.Log(component.GetType());
+            //print("Particle System Props: " + info[0]);
+
+            /*
+            foreach (FieldInfo fi in component.GetType().GetFields())
+            {
+                System.Object obj = (System.Object)component;
+                Debug.Log("fi name " + fi.Name + " val " + fi.GetValue(obj));
+            }
+            */
+
+            //List<PropertyInfo> properties = component.GetType().GetProperties();
+            foreach (PropertyInfo property in component.GetType().GetProperties())
+            {
+                //Debug.Log("property: " + property);
+                if (!property.IsDefined(typeof(ObsoleteAttribute), true))
+                {
+                    object propertyValue = property.GetValue(component, null);
+                    //component.GetType().GetProperty(property) = propertyValue;
+                    if(property.CanWrite)
+                    {
+                        property.SetValue(compy, propertyValue);
+                    }
+                    own_property property_ = new own_property( property.Name.ToString(), propertyValue.ToString());
+                    properties_.Add(property_);
+                    //Debug.Log("Property Value: " + propertyValue);
+                    //own_property property_ = new own_property();
+                }
+
+                //object theRealObject = property.GetValue(component);
+                //Debug.Log("")
+            }
+            own_component component_ = new own_component(component.GetType().ToString(), properties_);
+            components_.Add(component_);
+
+        }
+
+        return components_;
+    }
+
 
 }
 
@@ -779,6 +863,8 @@ public class OwnGameObjectClass
     public Quaternion rotation;
     public int go_ID;
 
+    public List<own_component> components;
+
     // Extra components
     public string transition_style;
     public string transition_style2;
@@ -809,6 +895,7 @@ public class OwnGameObjectClass
         this.scale = scale;
         this.position = position;
         this.rotation = rotation;
+        this.components = components_;
 
     }
 
@@ -854,6 +941,39 @@ public class SceneSettings
 
 
 }
+
+[Serializable]
+public class own_property
+{
+    public string name;
+    public string value;
+
+    public own_property(string name_, string value_)
+    {
+        this.name = name_;
+        this.value = value_;
+    }
+}
+
+
+
+[Serializable]
+public class own_component
+{
+    public string name;
+    public List<own_property> properties;
+
+    public own_component(string name_, List<own_property> properties_)
+    {
+        this.name = name_;
+        this.properties = properties_;
+    }
+
+
+}
+
+
+
 
 
 
