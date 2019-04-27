@@ -262,6 +262,7 @@ public class save_and_load_GOs : MonoBehaviour
 
         //own_GameObjectList2UnityGameObjectList(sceneData.GameObjectList);
         TransformAndCreate2UnityGameObjectList(sceneData.GameObjectList);
+        
 
         //// Load SceneSettings: Camera and Skybox
         // Camera
@@ -431,6 +432,8 @@ public class save_and_load_GOs : MonoBehaviour
                     //Debug.Log("oldObject.position " + oldObject.position);
                     //Debug.Log("newObject.position " + newObject.position);
 
+                    transferComponentsFromOwnGO2GO(newObject, oldObject.gameObject);
+
                 }
 
             }
@@ -538,6 +541,20 @@ public class save_and_load_GOs : MonoBehaviour
 
     }
 
+    public static void transferComponentsFromOwnGO2GO(OwnGameObjectClass own_GO, GameObject GO)
+    {
+        foreach(own_component component in own_GO.components)
+        {
+            Debug.Log("CCComponent " + component.name);
+            if(GO.GetComponent(component.name) ?? null)
+            {
+                Type typy = Type.GetType(component.name);
+                GO.AddComponent<UnityEngine.ParticleSystemRenderer>();
+            }
+            //object unity_component = GO.GetComponent(component.name);
+        }
+    }
+
     
     public static void PlayOwnAudio(string file)
     {
@@ -584,6 +601,9 @@ public class save_and_load_GOs : MonoBehaviour
     {
         var startpos = oldObject.position;
         Vector3 endpos = newObject.position;
+        Debug.Log("endpos naan? " + endpos);
+        Debug.Log("startpos naan? " + startpos);
+        Debug.Log("Vector3.Lerp: " + Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0.0f, 1.0f, 0.0f)));
 
         Quaternion startrot = oldObject.rotation;
         Quaternion endrot = newObject.rotation;
