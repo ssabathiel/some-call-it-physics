@@ -63,25 +63,25 @@ public class GO_inspector : Editor {
             // Appear sounds
             EditorGUILayout.LabelField("  Appear Sound:");
             _appear_choiceIndex = EditorGUILayout.Popup(_appear_choiceIndex, _appear_sound_choices);
-            someClass.Appear_Sound = _appear_sound_choices[_appear_choiceIndex];
+            someClass.extra_Go_Params_Serilizable.Appear_Sound = _appear_sound_choices[_appear_choiceIndex];
             
 
             // Move sounds
             EditorGUILayout.LabelField("  Move Sound:");
             _move_choiceIndex = EditorGUILayout.Popup(_move_choiceIndex, _move_sound_choices);
-            someClass.Move_Sound = _move_sound_choices[_move_choiceIndex];
+            someClass.extra_Go_Params_Serilizable.Move_Sound = _move_sound_choices[_move_choiceIndex];
 
             // Disappear sounds
             EditorGUILayout.LabelField("  Disappear Sound:");
             _disappear_choiceIndex = EditorGUILayout.Popup(_disappear_choiceIndex, _disappear_sound_choices);
-            someClass.Disappear_Sound = _disappear_sound_choices[_disappear_choiceIndex];
+            someClass.extra_Go_Params_Serilizable.Disappear_Sound = _disappear_sound_choices[_disappear_choiceIndex];
         }
 
 
 
 
 
-
+        
         /////////////
         //// MOVETYPES
         /////////////
@@ -103,20 +103,20 @@ public class GO_inspector : Editor {
             EditorGUILayout.LabelField("Translation", EditorStyles.boldLabel);
             EditorGUILayout.LabelField("  By Time or Speed");
             _move_type_choiceIndex = EditorGUILayout.Popup(_move_type_choiceIndex, _move_type_choices);
-            someClass.MoveType = _move_type_choices[_move_type_choiceIndex];
+            someClass.extra_Go_Params_Serilizable.MoveType = _move_type_choices[_move_type_choiceIndex];
 
-            switch (someClass.MoveType)
+            switch (someClass.extra_Go_Params_Serilizable.MoveType)
             {
                 case "Time":
-                    someClass.MoveTime = EditorGUILayout.FloatField(" MoveTime:", someClass.MoveTime);
-                    someClass.value = someClass.MoveTime;
+                    someClass.extra_Go_Params_Serilizable.MoveTime = EditorGUILayout.FloatField(" MoveTime:", someClass.extra_Go_Params_Serilizable.MoveTime);
+                    someClass.extra_Go_Params_Serilizable.value = someClass.extra_Go_Params_Serilizable.MoveTime;
                     break;
                 case "Speed":
                     EditorGUILayout.LabelField(" Speed Function");
                     _speed_fct_choiceIndex = EditorGUILayout.Popup(_speed_fct_choiceIndex, _speed_fct_choices);
-                    someClass.SpeedFct = _speed_fct_choices[_speed_fct_choiceIndex];
-                    someClass.Speed = EditorGUILayout.FloatField(" Speed:", someClass.Speed);
-                    someClass.value = someClass.Speed;
+                    someClass.extra_Go_Params_Serilizable.SpeedFct = _speed_fct_choices[_speed_fct_choiceIndex];
+                    someClass.extra_Go_Params_Serilizable.Speed = EditorGUILayout.FloatField(" Speed:", someClass.extra_Go_Params_Serilizable.Speed);
+                    someClass.extra_Go_Params_Serilizable.value = someClass.extra_Go_Params_Serilizable.Speed;
                     break;
             }
 
@@ -128,35 +128,40 @@ public class GO_inspector : Editor {
                 EditorGUILayout.LabelField("Rotation", EditorStyles.boldLabel);
                 EditorGUILayout.LabelField("  By Time or Speed");
                 _rotation_type_choiceIndex = EditorGUILayout.Popup(_rotation_type_choiceIndex, _rotation_type_choices);
-                someClass.RotationType = _rotation_type_choices[_rotation_type_choiceIndex];
+                someClass.extra_Go_Params_Serilizable.RotationType = _rotation_type_choices[_rotation_type_choiceIndex];
 
-                switch (someClass.RotationType)
+                switch (someClass.extra_Go_Params_Serilizable.RotationType)
                 {
                     case "Time":
-                        someClass.RotationTime = EditorGUILayout.FloatField(" RotationTime:", someClass.RotationTime);
+                        someClass.extra_Go_Params_Serilizable.RotationTime = EditorGUILayout.FloatField(" RotationTime:", someClass.extra_Go_Params_Serilizable.RotationTime);
                         break;
                     case "Speed":
                         EditorGUILayout.LabelField(" Rotation Speed Function");
                         _rotationspeed_fct_choiceIndex = EditorGUILayout.Popup(_rotationspeed_fct_choiceIndex, _rotationspeed_fct_choices);
-                        someClass.RotationSpeedFct = _rotationspeed_fct_choices[_rotationspeed_fct_choiceIndex];
-                        someClass.RotationSpeed = EditorGUILayout.FloatField(" Speed:", someClass.RotationSpeed);
+                        someClass.extra_Go_Params_Serilizable.RotationSpeedFct = _rotationspeed_fct_choices[_rotationspeed_fct_choiceIndex];
+                        someClass.extra_Go_Params_Serilizable.RotationSpeed = EditorGUILayout.FloatField(" Speed:", someClass.extra_Go_Params_Serilizable.RotationSpeed);
                         break;
                 }
 
             }
             else
             {
-                someClass.RotationType = someClass.MoveType;
-                someClass.RotationTime = someClass.RotationTime;
-                someClass.RotationSpeedFct = someClass.SpeedFct;
-                someClass.RotationSpeed = someClass.Speed;
+                someClass.extra_Go_Params_Serilizable.RotationType = someClass.extra_Go_Params_Serilizable.MoveType;
+                someClass.extra_Go_Params_Serilizable.RotationTime = someClass.extra_Go_Params_Serilizable.RotationTime;
+                someClass.extra_Go_Params_Serilizable.RotationSpeedFct = someClass.extra_Go_Params_Serilizable.SpeedFct;
+                someClass.extra_Go_Params_Serilizable.RotationSpeed = someClass.extra_Go_Params_Serilizable.Speed;
             }
 
         } // END Move Foldout
 
         // Save the changes back to the object
         EditorUtility.SetDirty(target);
+
+    
     }
+
+
+
 
     // Use this for initialization
     void Start () {

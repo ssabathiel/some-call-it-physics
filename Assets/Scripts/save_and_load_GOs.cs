@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using UnityEngine.UI;
 using System.Reflection;
+using extra_go_params_namespace;
 
 [RequireComponent(typeof(AudioSource))]
 public class save_and_load_GOs : MonoBehaviour
@@ -247,6 +248,8 @@ public class save_and_load_GOs : MonoBehaviour
             GameObject prefab = (GameObject)Resources.Load(prefab_path);
             GameObject newObject1 = (GameObject)Instantiate(prefab);
             own_GameObject2UnityGameObject(gObject, newObject1);
+            transferComponentsFromOwnGO2GO(gObject, newObject1);
+            newObject1.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
         }
 
     }
@@ -289,7 +292,7 @@ public class save_and_load_GOs : MonoBehaviour
 
         foreach (var child in tempArray)
         {
-            int go_ID = child.GetComponent<extra_go_params>().go_ID_;
+            int go_ID = child.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.go_ID_;
             if (!IsGoID_InGoLIST(go_ID, newList))
             {
                 DestroyImmediate(child);
@@ -370,15 +373,24 @@ public class save_and_load_GOs : MonoBehaviour
 
         foreach (Transform gObject in Protagonists.transform)
         {
-            List<own_component> components_ = GetComponentsAndProperties(gObject.gameObject);
-            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation, components_);
 
-            if (gObject.gameObject.GetComponent<extra_go_params>().go_ID_ == 0)
+            // Prepare extra_go_params
+            //save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+            extra_go_params go_params = (extra_go_params)gObject.GetComponent(typeof(extra_go_params)); //gObject.gameObject.GetComponent<extra_go_params>();
+            
+            List<own_component> components_ = GetComponentsAndProperties(gObject.gameObject);
+            OwnGameObjectClass gameObjectInScene = new OwnGameObjectClass(gObject.name, gObject.transform.localScale, gObject.transform.position, gObject.transform.rotation, components_, go_params.extra_Go_Params_Serilizable);
+
+            if (gObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.go_ID_ == 0)
             {
                 int rand_ID = rnd.Next(1, 100000000);
-                gObject.gameObject.GetComponent<extra_go_params>().go_ID_ = rand_ID;
+                gObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.go_ID_ = rand_ID;
+                
             }
-            gameObjectInScene.go_ID = gObject.gameObject.GetComponent<extra_go_params>().go_ID_;
+            gameObjectInScene.go_ID = gObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.go_ID_;
+
+
+            //gObject.gameObject.GetComponent<extra_go_params>().value = 2.0f;
 
             gameObjectList.Add(gameObjectInScene);
 
@@ -407,7 +419,7 @@ public class save_and_load_GOs : MonoBehaviour
             
             foreach (Transform oldObject in Protagonists.transform)
             {
-                if (newObject.go_ID == oldObject.gameObject.GetComponent<extra_go_params>().go_ID_)
+                if (newObject.go_ID == oldObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.go_ID_)
                 {
                     IDinList = true;
                     // Transform
@@ -417,6 +429,8 @@ public class save_and_load_GOs : MonoBehaviour
 
                     //IEnumerator coroutine = moveToX(oldObject, newObject.position, 1.0f);
                     GameObject go = GameObject.Find("@state_scripts");
+                    //go_params.extra_Go_Params_Serilizable.initialize();
+                    oldObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
                     save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
                     //myscript.StartCoroutine(myscript.moveToX(oldObject, newObject.position, 10.0f));
                     myscript.StartCoroutine(myscript.WholeMoveObject(oldObject, newObject));
@@ -446,6 +460,7 @@ public class save_and_load_GOs : MonoBehaviour
                 //GameObject newObject1 = (GameObject)Instantiate(prefab);
                 GameObject go = GameObject.Find("@state_scripts");
                 save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
+                go.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
                 //myscript.StartCoroutine(myscript.moveToX(oldObject, newObject.position, 10.0f));
 
                 //own_GameObject2UnityGameObject(newObject, newObject1);
@@ -516,6 +531,7 @@ public class save_and_load_GOs : MonoBehaviour
             string prefab_path = "Prefabs/" + gObject.name;
             GameObject prefab = (GameObject)Resources.Load(prefab_path);
             GameObject newObject1 = (GameObject)Instantiate(prefab);
+            newObject1.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
 
             own_GameObject2UnityGameObject(gObject, newObject1);
         }
@@ -537,19 +553,61 @@ public class save_and_load_GOs : MonoBehaviour
         
 
         // ID
-        GO.gameObject.GetComponent<extra_go_params>().go_ID_ = own_GO.go_ID;
+        GO.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.go_ID_ = own_GO.go_ID;
 
     }
 
     public static void transferComponentsFromOwnGO2GO(OwnGameObjectClass own_GO, GameObject GO)
     {
-        foreach(own_component component in own_GO.components)
+        /*
+        string componentname = "UnityEngine.ParticleSystem";
+        string whole_componentname = componentname + ", UnityEngine";
+        Type typy1 = Type.GetType(whole_componentname, true);
+        Debug.Log("typy1= " + typy1);
+        GO.AddComponent(typy1);
+        */
+
+        // Delete all components that are not in new object
+        foreach (var component in GO.GetComponents<Component>())
         {
-            Debug.Log("CCComponent " + component.name);
-            if(GO.GetComponent(component.name) ?? null)
+            //Debug.Log("old component: " + component.GetType().ToString());
+            bool component_is_there = false;
+            foreach (own_component own_component in own_GO.components)
             {
-                Type typy = Type.GetType(component.name);
-                GO.AddComponent<UnityEngine.ParticleSystemRenderer>();
+                //Debug.Log("new component: " + own_component.name);
+                
+                if(component.GetType().ToString() == own_component.name)
+                {
+                    component_is_there = true;
+                    Debug.Log("Component before and after there: " + own_component.name);
+                }                            
+                
+            }
+
+            if ((component_is_there == false) && (component.name != "extra_go_params"))
+            {
+                Debug.Log("destroyed component: " + component.GetType().ToString());
+                Destroy(component);
+            }
+
+        }
+            //GO.AddComponent<UnityEngine.ParticleSystem>();
+            foreach (own_component component in own_GO.components)
+        {
+
+
+            //string whole_componentname = component.name + ", UnityEngine";
+            //if ( (GO.GetComponent(compoonent.name) ?? null) && (component.name != "extra_go_params") )
+            if ((component.name != "extra_go_params") )
+            {
+                
+                Debug.Log("CCCComponent not yet there" + component.name);
+                string whole_componentname = component.name + ", UnityEngine";
+                Type typy1 = Type.GetType(whole_componentname, true);
+                Debug.Log("typy1= " + typy1);
+                GO.AddComponent(typy1);
+                
+
             }
             //object unity_component = GO.GetComponent(component.name);
         }
@@ -594,26 +652,23 @@ public class save_and_load_GOs : MonoBehaviour
         parenty.GetComponent<AudioSource>().PlayOneShot(myAudioClip);
         //Destroy(parenty.GetComponent<AudioSource>());
         //parenty.GetComponent<AudioSource>().Play();
-        Debug.Log("Play AudioSound");
+        
     }
 
     IEnumerator WholeMoveObject(Transform oldObject, OwnGameObjectClass newObject)
     {
         var startpos = oldObject.position;
         Vector3 endpos = newObject.position;
-        Debug.Log("endpos naan? " + endpos);
-        Debug.Log("startpos naan? " + startpos);
-        Debug.Log("Vector3.Lerp: " + Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0.0f, 1.0f, 0.0f)));
 
         Quaternion startrot = oldObject.rotation;
         Quaternion endrot = newObject.rotation;
 
         MoveObject moveObject = new MoveObject();
-        Debug.Log("Movetype " + oldObject.gameObject.GetComponent<extra_go_params>().MoveType);
+        //Debug.Log("Movetype " + oldObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.MoveType);
         while (true)
         {
             //yield return moveObject.Translation(oldObject, startpos, endpos, 0.5f, MoveObject.MoveType.Time);
-            yield return moveObject.Translation(oldObject, startpos, endpos, endrot, oldObject.gameObject.GetComponent<extra_go_params>().value, oldObject.gameObject.GetComponent<extra_go_params>().MoveType, oldObject.gameObject.GetComponent<extra_go_params>().SpeedFct);
+            yield return moveObject.Translation(oldObject, startpos, endpos, endrot, oldObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.value, oldObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.MoveType, oldObject.gameObject.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.SpeedFct);
             //yield return moveObject.Rotation(oldObject, startrot, endrot, oldObject.gameObject.GetComponent<extra_go_params>().RotationTime, oldObject.gameObject.GetComponent<extra_go_params>().RotationType, oldObject.gameObject.GetComponent<extra_go_params>().RotationSpeedFct);
             //yield return moveObject.Rotation_old(Transform thisTransform, Vector3 degrees, float time);
 
@@ -739,7 +794,12 @@ public class save_and_load_GOs : MonoBehaviour
                 }
                 float rate = (moveType == "Time") ? 1.0f / value : 1.0f / Vector3.Distance(startPos, endPos) * value;
                 t += Time.deltaTime * rate;
-                thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
+                //Debug.Log("directly before - Vector3.Lerp " + Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t)));
+                //Debug.Log("at t " + t);
+                //Debug.Log("Time.deltaTime " + Time.deltaTime);
+                //Debug.Log("rate " + rate);
+                //Debug.Log("value " + value);
+                thisTransform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t) );
                 thisTransform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
                 yield return null;
             }
@@ -829,15 +889,21 @@ public class save_and_load_GOs : MonoBehaviour
                 //Debug.Log("property: " + property);
                 if (!property.IsDefined(typeof(ObsoleteAttribute), true))
                 {
-                    object propertyValue = property.GetValue(component, null);
-                    //component.GetType().GetProperty(property) = propertyValue;
-                    if(property.CanWrite && property.Name != null && propertyValue != null)
+
+                    if(property.Name != null)
                     {
-                        property.SetValue(compy, propertyValue);
-                        own_property property_ = new own_property(property.Name.ToString(), propertyValue.ToString());
-                        properties_.Add(property_);
-                        Debug.Log("in theree");
+                        object propertyValue = property.GetValue(component, null);
+                        //component.GetType().GetProperty(property) = propertyValue;
+                        if (property.CanWrite && property.Name != null && propertyValue != null && property.CanRead)
+                        {
+
+                            property.SetValue(compy, propertyValue);
+                            own_property property_ = new own_property(property.Name.ToString(), propertyValue.ToString());
+                            properties_.Add(property_);
+                        }
+
                     }
+
 
                     
                     //Debug.Log("Property Value: " + propertyValue);
@@ -887,6 +953,7 @@ public class OwnGameObjectClass
     public int go_ID;
 
     public List<own_component> components;
+    public extra_go_params_serializable go_params;
 
     // Extra components
     public string transition_style;
@@ -912,21 +979,27 @@ public class OwnGameObjectClass
     public bool Sync;
 
 
-    public OwnGameObjectClass(string name, Vector3 scale, Vector3 position, Quaternion rotation, List<own_component> components_)
+    public OwnGameObjectClass(string name, Vector3 scale, Vector3 position, Quaternion rotation, List<own_component> components_, extra_go_params_serializable go_params_)
     {
         this.name = name;
         this.scale = scale;
         this.position = position;
         this.rotation = rotation;
-        this.components = components_;
+        this.components = components_;        
+        this.go_params = go_params_;
 
     }
 
 
 }
 
-
-
+/*
+[Serializable]
+public static class extra_go_params_static
+{
+    public int extra_go_params
+}
+*/
 
 [Serializable]
 public class SceneSettings

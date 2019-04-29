@@ -8,9 +8,9 @@
                 "z": 1.0
             },
             "position": {
-                "x": 25.568815231323243,
-                "y": 10.267950057983399,
-                "z": -0.3601562976837158
+                "x": 6.068816661834717,
+                "y": 9.467949867248536,
+                "z": 0.0
             },
             "rotation": {
                 "x": 0.0,
@@ -25,11 +25,11 @@
                     "properties": [
                         {
                             "name": "position",
-                            "value": "(25,6, 10,3, -0,4)"
+                            "value": "(6,1, 9,5, 0,0)"
                         },
                         {
                             "name": "localPosition",
-                            "value": "(32,8, 11,2, -2,2)"
+                            "value": "(13,3, 10,4, -1,8)"
                         },
                         {
                             "name": "eulerAngles",
@@ -228,172 +228,6 @@
                         {
                             "name": "enabled",
                             "value": "True"
-                        },
-                        {
-                            "name": "tag",
-                            "value": "Untagged"
-                        },
-                        {
-                            "name": "name",
-                            "value": "sheep"
-                        },
-                        {
-                            "name": "hideFlags",
-                            "value": "None"
-                        }
-                    ]
-                },
-                {
-                    "name": "UnityEngine.ParticleSystem",
-                    "properties": [
-                        {
-                            "name": "time",
-                            "value": "0"
-                        },
-                        {
-                            "name": "randomSeed",
-                            "value": "3675246159"
-                        },
-                        {
-                            "name": "useAutoRandomSeed",
-                            "value": "False"
-                        },
-                        {
-                            "name": "tag",
-                            "value": "Untagged"
-                        },
-                        {
-                            "name": "name",
-                            "value": "sheep"
-                        },
-                        {
-                            "name": "hideFlags",
-                            "value": "None"
-                        }
-                    ]
-                },
-                {
-                    "name": "UnityEngine.ParticleSystemRenderer",
-                    "properties": [
-                        {
-                            "name": "renderMode",
-                            "value": "Billboard"
-                        },
-                        {
-                            "name": "lengthScale",
-                            "value": "2"
-                        },
-                        {
-                            "name": "velocityScale",
-                            "value": "0"
-                        },
-                        {
-                            "name": "cameraVelocityScale",
-                            "value": "0"
-                        },
-                        {
-                            "name": "normalDirection",
-                            "value": "1"
-                        },
-                        {
-                            "name": "alignment",
-                            "value": "View"
-                        },
-                        {
-                            "name": "pivot",
-                            "value": "(0,0, 0,0, 0,0)"
-                        },
-                        {
-                            "name": "sortMode",
-                            "value": "None"
-                        },
-                        {
-                            "name": "sortingFudge",
-                            "value": "0"
-                        },
-                        {
-                            "name": "minParticleSize",
-                            "value": "0"
-                        },
-                        {
-                            "name": "maxParticleSize",
-                            "value": "0,5"
-                        },
-                        {
-                            "name": "maskInteraction",
-                            "value": "None"
-                        },
-                        {
-                            "name": "enabled",
-                            "value": "True"
-                        },
-                        {
-                            "name": "shadowCastingMode",
-                            "value": "Off"
-                        },
-                        {
-                            "name": "receiveShadows",
-                            "value": "False"
-                        },
-                        {
-                            "name": "motionVectorGenerationMode",
-                            "value": "Object"
-                        },
-                        {
-                            "name": "lightProbeUsage",
-                            "value": "Off"
-                        },
-                        {
-                            "name": "reflectionProbeUsage",
-                            "value": "Off"
-                        },
-                        {
-                            "name": "sortingLayerName",
-                            "value": "Default"
-                        },
-                        {
-                            "name": "sortingLayerID",
-                            "value": "0"
-                        },
-                        {
-                            "name": "sortingOrder",
-                            "value": "0"
-                        },
-                        {
-                            "name": "allowOcclusionWhenDynamic",
-                            "value": "True"
-                        },
-                        {
-                            "name": "lightmapIndex",
-                            "value": "-1"
-                        },
-                        {
-                            "name": "realtimeLightmapIndex",
-                            "value": "-1"
-                        },
-                        {
-                            "name": "lightmapScaleOffset",
-                            "value": "(1,0, 1,0, 0,0, 0,0)"
-                        },
-                        {
-                            "name": "realtimeLightmapScaleOffset",
-                            "value": "(1,0, 1,0, 0,0, 0,0)"
-                        },
-                        {
-                            "name": "material",
-                            "value": "Default-Material (Instance) (UnityEngine.Material)"
-                        },
-                        {
-                            "name": "sharedMaterial",
-                            "value": "Default-Material (Instance) (UnityEngine.Material)"
-                        },
-                        {
-                            "name": "materials",
-                            "value": "UnityEngine.Material[]"
-                        },
-                        {
-                            "name": "sharedMaterials",
-                            "value": "UnityEngine.Material[]"
                         },
                         {
                             "name": "tag",
@@ -442,8 +276,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 7.46881628036499,
-                "y": 2.66795015335083,
+                "x": -36.63118362426758,
+                "y": -2.0320498943328859,
                 "z": -1.83984375
             },
             "rotation": {
@@ -459,11 +293,11 @@
                     "properties": [
                         {
                             "name": "position",
-                            "value": "(7,5, 2,7, -1,8)"
+                            "value": "(-36,6, -2,0, -1,8)"
                         },
                         {
                             "name": "localPosition",
-                            "value": "(14,7, 3,6, -3,7)"
+                            "value": "(-29,4, -1,1, -3,7)"
                         },
                         {
                             "name": "eulerAngles",
@@ -710,8 +544,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 21.868816375732423,
-                "y": 3.367950439453125,
+                "x": 5.7688164710998539,
+                "y": -6.032049655914307,
                 "z": -1.83984375
             },
             "rotation": {
@@ -727,11 +561,11 @@
                     "properties": [
                         {
                             "name": "position",
-                            "value": "(21,9, 3,4, -1,8)"
+                            "value": "(5,8, -6,0, -1,8)"
                         },
                         {
                             "name": "localPosition",
-                            "value": "(29,1, 4,3, -3,7)"
+                            "value": "(13,0, -5,1, -3,7)"
                         },
                         {
                             "name": "eulerAngles",
@@ -926,6 +760,123 @@
                         {
                             "name": "runInEditMode",
                             "value": "False"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.AudioSource",
+                    "properties": [
+                        {
+                            "name": "volume",
+                            "value": "1"
+                        },
+                        {
+                            "name": "pitch",
+                            "value": "1"
+                        },
+                        {
+                            "name": "time",
+                            "value": "0"
+                        },
+                        {
+                            "name": "timeSamples",
+                            "value": "0"
+                        },
+                        {
+                            "name": "loop",
+                            "value": "False"
+                        },
+                        {
+                            "name": "ignoreListenerVolume",
+                            "value": "False"
+                        },
+                        {
+                            "name": "playOnAwake",
+                            "value": "False"
+                        },
+                        {
+                            "name": "ignoreListenerPause",
+                            "value": "False"
+                        },
+                        {
+                            "name": "velocityUpdateMode",
+                            "value": "Auto"
+                        },
+                        {
+                            "name": "panStereo",
+                            "value": "0"
+                        },
+                        {
+                            "name": "spatialBlend",
+                            "value": "0"
+                        },
+                        {
+                            "name": "spatialize",
+                            "value": "False"
+                        },
+                        {
+                            "name": "spatializePostEffects",
+                            "value": "False"
+                        },
+                        {
+                            "name": "reverbZoneMix",
+                            "value": "1"
+                        },
+                        {
+                            "name": "bypassEffects",
+                            "value": "False"
+                        },
+                        {
+                            "name": "bypassListenerEffects",
+                            "value": "False"
+                        },
+                        {
+                            "name": "bypassReverbZones",
+                            "value": "False"
+                        },
+                        {
+                            "name": "dopplerLevel",
+                            "value": "1"
+                        },
+                        {
+                            "name": "spread",
+                            "value": "0"
+                        },
+                        {
+                            "name": "priority",
+                            "value": "128"
+                        },
+                        {
+                            "name": "mute",
+                            "value": "False"
+                        },
+                        {
+                            "name": "minDistance",
+                            "value": "3,812651"
+                        },
+                        {
+                            "name": "maxDistance",
+                            "value": "500"
+                        },
+                        {
+                            "name": "rolloffMode",
+                            "value": "Logarithmic"
                         },
                         {
                             "name": "enabled",
@@ -978,8 +929,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 18.16881561279297,
-                "y": 9.367950439453125,
+                "x": -24.131183624267579,
+                "y": 10.667950630187989,
                 "z": 0.0
             },
             "rotation": {
@@ -995,11 +946,11 @@
                     "properties": [
                         {
                             "name": "position",
-                            "value": "(18,2, 9,4, 0,0)"
+                            "value": "(-24,1, 10,7, 0,0)"
                         },
                         {
                             "name": "localPosition",
-                            "value": "(25,4, 10,3, -1,8)"
+                            "value": "(-16,9, 11,6, -1,8)"
                         },
                         {
                             "name": "eulerAngles",
@@ -1194,6 +1145,123 @@
                         {
                             "name": "runInEditMode",
                             "value": "False"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.AudioSource",
+                    "properties": [
+                        {
+                            "name": "volume",
+                            "value": "1"
+                        },
+                        {
+                            "name": "pitch",
+                            "value": "1"
+                        },
+                        {
+                            "name": "time",
+                            "value": "0"
+                        },
+                        {
+                            "name": "timeSamples",
+                            "value": "0"
+                        },
+                        {
+                            "name": "loop",
+                            "value": "False"
+                        },
+                        {
+                            "name": "ignoreListenerVolume",
+                            "value": "False"
+                        },
+                        {
+                            "name": "playOnAwake",
+                            "value": "False"
+                        },
+                        {
+                            "name": "ignoreListenerPause",
+                            "value": "False"
+                        },
+                        {
+                            "name": "velocityUpdateMode",
+                            "value": "Auto"
+                        },
+                        {
+                            "name": "panStereo",
+                            "value": "0"
+                        },
+                        {
+                            "name": "spatialBlend",
+                            "value": "0"
+                        },
+                        {
+                            "name": "spatialize",
+                            "value": "False"
+                        },
+                        {
+                            "name": "spatializePostEffects",
+                            "value": "False"
+                        },
+                        {
+                            "name": "reverbZoneMix",
+                            "value": "1"
+                        },
+                        {
+                            "name": "bypassEffects",
+                            "value": "False"
+                        },
+                        {
+                            "name": "bypassListenerEffects",
+                            "value": "False"
+                        },
+                        {
+                            "name": "bypassReverbZones",
+                            "value": "False"
+                        },
+                        {
+                            "name": "dopplerLevel",
+                            "value": "1"
+                        },
+                        {
+                            "name": "spread",
+                            "value": "0"
+                        },
+                        {
+                            "name": "priority",
+                            "value": "128"
+                        },
+                        {
+                            "name": "mute",
+                            "value": "False"
+                        },
+                        {
+                            "name": "minDistance",
+                            "value": "1"
+                        },
+                        {
+                            "name": "maxDistance",
+                            "value": "500"
+                        },
+                        {
+                            "name": "rolloffMode",
+                            "value": "Logarithmic"
                         },
                         {
                             "name": "enabled",

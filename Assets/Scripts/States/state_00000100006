@@ -256,7 +256,7 @@
                 "moveType": 0,
                 "RotationTime": 0.0,
                 "RotationSpeed": 0.0,
-                "value": 8.0,
+                "value": 30.0,
                 "MoveTime": 2.0,
                 "Speed": 2.0,
                 "testy2": 0.0,
@@ -543,7 +543,7 @@
                 "moveType": 0,
                 "RotationTime": 0.0,
                 "RotationSpeed": 0.0,
-                "value": 8.0,
+                "value": 30.0,
                 "MoveTime": 2.0,
                 "Speed": 2.0,
                 "testy2": 0.0,
@@ -830,7 +830,7 @@
                 "moveType": 0,
                 "RotationTime": 0.0,
                 "RotationSpeed": 0.0,
-                "value": 8.0,
+                "value": 30.0,
                 "MoveTime": 2.0,
                 "Speed": 2.0,
                 "testy2": 0.0,
@@ -869,8 +869,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 26.46881675720215,
-                "y": -5.232049942016602,
+                "x": -6.631183624267578,
+                "y": -5.432049751281738,
                 "z": -1.83984375
             },
             "rotation": {
@@ -886,11 +886,11 @@
                     "properties": [
                         {
                             "name": "position",
-                            "value": "(26,5, -5,2, -1,8)"
+                            "value": "(-6,6, -5,4, -1,8)"
                         },
                         {
                             "name": "localPosition",
-                            "value": "(33,7, -4,3, -3,7)"
+                            "value": "(0,6, -4,5, -3,7)"
                         },
                         {
                             "name": "eulerAngles",
@@ -1234,10 +1234,10 @@
                 "moveType": 0,
                 "RotationTime": 0.0,
                 "RotationSpeed": 0.0,
-                "value": 8.0,
+                "value": 30.0,
                 "MoveTime": 2.0,
                 "Speed": 2.0,
-                "testy2": 0.0,
+                "testy2": 8.0,
                 "LayerNum": 0,
                 "Sync": false
             },
@@ -1638,10 +1638,10 @@
                 "moveType": 0,
                 "RotationTime": 0.0,
                 "RotationSpeed": 0.0,
-                "value": 8.0,
+                "value": 30.0,
                 "MoveTime": 2.0,
                 "Speed": 2.0,
-                "testy2": 0.0,
+                "testy2": 8.0,
                 "LayerNum": 0,
                 "Sync": false
             },
@@ -2028,6 +2028,172 @@
                             "value": "None"
                         }
                     ]
+                },
+                {
+                    "name": "UnityEngine.ParticleSystem",
+                    "properties": [
+                        {
+                            "name": "time",
+                            "value": "3,079998"
+                        },
+                        {
+                            "name": "randomSeed",
+                            "value": "2477488926"
+                        },
+                        {
+                            "name": "useAutoRandomSeed",
+                            "value": "False"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
+                },
+                {
+                    "name": "UnityEngine.ParticleSystemRenderer",
+                    "properties": [
+                        {
+                            "name": "renderMode",
+                            "value": "Billboard"
+                        },
+                        {
+                            "name": "lengthScale",
+                            "value": "2"
+                        },
+                        {
+                            "name": "velocityScale",
+                            "value": "0"
+                        },
+                        {
+                            "name": "cameraVelocityScale",
+                            "value": "0"
+                        },
+                        {
+                            "name": "normalDirection",
+                            "value": "1"
+                        },
+                        {
+                            "name": "alignment",
+                            "value": "View"
+                        },
+                        {
+                            "name": "pivot",
+                            "value": "(0,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "sortMode",
+                            "value": "None"
+                        },
+                        {
+                            "name": "sortingFudge",
+                            "value": "0"
+                        },
+                        {
+                            "name": "minParticleSize",
+                            "value": "0"
+                        },
+                        {
+                            "name": "maxParticleSize",
+                            "value": "0,5"
+                        },
+                        {
+                            "name": "maskInteraction",
+                            "value": "None"
+                        },
+                        {
+                            "name": "enabled",
+                            "value": "True"
+                        },
+                        {
+                            "name": "shadowCastingMode",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "receiveShadows",
+                            "value": "False"
+                        },
+                        {
+                            "name": "motionVectorGenerationMode",
+                            "value": "Object"
+                        },
+                        {
+                            "name": "lightProbeUsage",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "reflectionProbeUsage",
+                            "value": "Off"
+                        },
+                        {
+                            "name": "sortingLayerName",
+                            "value": "Default"
+                        },
+                        {
+                            "name": "sortingLayerID",
+                            "value": "0"
+                        },
+                        {
+                            "name": "sortingOrder",
+                            "value": "0"
+                        },
+                        {
+                            "name": "allowOcclusionWhenDynamic",
+                            "value": "True"
+                        },
+                        {
+                            "name": "lightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "realtimeLightmapIndex",
+                            "value": "-1"
+                        },
+                        {
+                            "name": "lightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "realtimeLightmapScaleOffset",
+                            "value": "(1,0, 1,0, 0,0, 0,0)"
+                        },
+                        {
+                            "name": "material",
+                            "value": "Default-Material (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "sharedMaterial",
+                            "value": "Default-Material (Instance) (UnityEngine.Material)"
+                        },
+                        {
+                            "name": "materials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "sharedMaterials",
+                            "value": "UnityEngine.Material[]"
+                        },
+                        {
+                            "name": "tag",
+                            "value": "Untagged"
+                        },
+                        {
+                            "name": "name",
+                            "value": "ingenous"
+                        },
+                        {
+                            "name": "hideFlags",
+                            "value": "None"
+                        }
+                    ]
                 }
             ],
             "go_params": {
@@ -2042,10 +2208,10 @@
                 "moveType": 0,
                 "RotationTime": 0.0,
                 "RotationSpeed": 0.0,
-                "value": 8.0,
+                "value": 30.0,
                 "MoveTime": 2.0,
                 "Speed": 2.0,
-                "testy2": 0.0,
+                "testy2": 8.0,
                 "LayerNum": 0,
                 "Sync": false
             },
