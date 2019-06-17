@@ -52,6 +52,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d819a364a10f27848ac597470bd5f2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extra_Go_Params_Serilizable:
+    go_ID_: 0
+    Appear_Sound: 
+    Move_Sound: 
+    Disappear_Sound: 
+    MoveType: 
+    SpeedFct: 
+    RotationType: 
+    RotationSpeedFct: 
+    moveType: 0
+    RotationTime: 0
+    RotationSpeed: 0
+    value: 0
+    MoveTime: 0
+    Speed: 0
+    testy2: 0
+    LayerNum: 0
+    Sync: 0
 --- !u!212 &212832748531473646
 SpriteRenderer:
   m_ObjectHideFlags: 1

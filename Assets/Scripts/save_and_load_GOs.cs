@@ -6,11 +6,18 @@ using System;
 using UnityEngine.UI;
 using System.Reflection;
 using extra_go_params_namespace;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using OdinSerializer;
+
 
 [RequireComponent(typeof(AudioSource))]
 public class save_and_load_GOs : MonoBehaviour
 {
     public string active_state = "";
+
+    [SerializeField]
+    public ParticleSystem compy;
 
 
     void Update()
@@ -24,6 +31,23 @@ public class save_and_load_GOs : MonoBehaviour
             PrevStateInGame();
         }
 
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            
+
+
+            /*
+            string json = JsonUtility.ToJson(compy, true);
+
+            */
+
+
+            byte[] json = SerializationUtility.SerializeValue(compy, DataFormat.JSON);
+            string path = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\test_object";
+            System.IO.File.WriteAllText(path, BitConverter.ToString(json));
+        }
+
+
 
     }
 
@@ -34,6 +58,10 @@ public class save_and_load_GOs : MonoBehaviour
 
     void Start()
     {
+        GameObject statess = GameObject.Find("test_object");
+        compy = statess.GetComponent<ParticleSystem>();
+
+
         GameObject Protagonists = GameObject.Find("Protagonists");
         print("Protagonists[0].name: " + Protagonists.transform.GetChild(0).name);
         //var info = typeof(ParticleSystem).GetProperties();
@@ -231,6 +259,7 @@ public class save_and_load_GOs : MonoBehaviour
         GameObject cam = GameObject.Find("Main Camera");
         cam.transform.position = sceneData.sceneSettings.camera_pos;
         cam.transform.eulerAngles = sceneData.sceneSettings.camera_rot;
+
         //Skybox
         //RenderSettings.skybox = ...path + sceneData.sceneSettings.skybox_name... ;
         //RenderSettings.skybox.SetMatrix("_Rotation", sceneData.sceneSettings.skybox_rot) ;
@@ -534,6 +563,8 @@ public class save_and_load_GOs : MonoBehaviour
             newObject1.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
 
             own_GameObject2UnityGameObject(gObject, newObject1);
+
+            transferComponentsFromOwnGO2GO(gObject, newObject1);
         }
 
     }
@@ -579,20 +610,20 @@ public class save_and_load_GOs : MonoBehaviour
                 if(component.GetType().ToString() == own_component.name)
                 {
                     component_is_there = true;
-                    Debug.Log("Component before and after there: " + own_component.name);
+                    //Debug.Log("Component before and after there: " + own_component.name);
                 }                            
                 
             }
 
             if ((component_is_there == false) && (component.name != "extra_go_params"))
             {
-                Debug.Log("destroyed component: " + component.GetType().ToString());
+                //Debug.Log("destroyed component: " + component.GetType().ToString());
                 Destroy(component);
             }
 
         }
             //GO.AddComponent<UnityEngine.ParticleSystem>();
-            foreach (own_component component in own_GO.components)
+        foreach (own_component component in own_GO.components)
         {
 
 
@@ -601,19 +632,100 @@ public class save_and_load_GOs : MonoBehaviour
             if ((component.name != "extra_go_params") )
             {
                 
-                Debug.Log("CCCComponent not yet there" + component.name);
+                //Debug.Log("CCCComponent not yet there" + component.name);
                 string whole_componentname = component.name + ", UnityEngine";
                 Type typy1 = Type.GetType(whole_componentname, true);
-                Debug.Log("typy1= " + typy1);
-                GO.AddComponent(typy1);
+                //Debug.Log("typy1= " + typy1);
+                if(GO.GetComponent(typy1) == null)
+                {
+                    GO.AddComponent(typy1);
+                }
+
+
+                //Debug.Log("component.name " + component.name);
+                // change values of PROPERTIES according to the saved file
+                //List<PropertyInfo> properties = component.GetType().GetProperties();
+                //foreach (PropertyInfo property in GO.GetComponent(typy1).GetType().GetProperties())
+                foreach (own_property property in component.properties)
+                //foreach (var property in myComp.GetType().GetProperties())
+                {
+                    if(component.name == "UnityEngine.ParticleSystem")
+                    {
+                        Debug.Log("property: " + property.name);
+                    }
+                    PropertyInfo unity_property = GO.GetComponent(typy1).GetType().GetProperty(property.name);
+                    object propertyValue = property.value;
+                    //Debug.Log("property: " + property);
+                    if (!unity_property.IsDefined(typeof(ObsoleteAttribute), true))
+                    {
+                        
+                        //object propertyValue = property.GetValue(component, null);
+                        //component.GetType().GetProperty(property) = propertyValue;
+                        //propertyValue = 
+                        
+                        if (unity_property.CanWrite)
+                        {
+
+
+                            // if you want to serialize Vector3, go for: https://answers.unity.com/questions/1134997/string-to-vector3.html
+                            bool isSerializable = IsSerializable_own(unity_property);
+                            //if (CanChangeType(propertyValue, unity_property.PropertyType) )
+                            //TypeConverter.CanConvertTo
+                            System.ComponentModel.TypeConverter converter = System.ComponentModel.TypeDescriptor.GetConverter(propertyValue.GetType() );
+                            if (converter.CanConvertTo(unity_property.GetType() ) )
+                            {
+                                //unity_property.SetValue(GO.GetComponent(typy1), Convert.ChangeType(propertyValue, unity_property.PropertyType), null);
+                                unity_property.SetValue(GO.GetComponent(typy1), converter.ConvertTo(propertyValue, unity_property.PropertyType), null);
+                            }
+                        }
+                        
+
+                        //Debug.Log("Property Value: " + propertyValue);
+                    }
+
+                    //object theRealObject = property.GetValue(component);
+                    //Debug.Log("")
+
+                }
                 
+
+
 
             }
             //object unity_component = GO.GetComponent(component.name);
         }
     }
 
-    
+    public static bool CanChangeType(object value, Type conversionType)
+    {
+        if (conversionType == null)
+        {
+            return false;
+        }
+
+        if (value == null)
+        {
+            return false;
+        }
+
+        IConvertible convertible = value as IConvertible;
+
+        if (convertible == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static bool IsSerializable_own(object obj)
+    {
+        Type t = obj.GetType();
+
+        return Attribute.IsDefined(t, typeof(DataContractAttribute)) || t.IsSerializable || (obj is IXmlSerializable);
+
+    }
+
     public static void PlayOwnAudio(string file)
     {
         GameObject parenty = GameObject.Find("Protagonists");
@@ -856,7 +968,7 @@ public class save_and_load_GOs : MonoBehaviour
 
         List<own_component> components_ = new List<own_component>();
 
-        foreach (var component in go_.GetComponents<Component>())
+        foreach (Component component in go_.GetComponents<Component>())
         {
 
             List<own_property> properties_ = new List<own_property>();
@@ -866,6 +978,28 @@ public class save_and_load_GOs : MonoBehaviour
             object compy = go_.GetComponent(typy);
             object compy2 = go_.GetComponent("transform");
 
+            /*
+            if(component.name == "UnityEngine.ParticleSystem")
+            {
+                SerializedObject m_Object = new SerializedObject(component);
+                Debug.Log("--------" + component.GetType() + "-------");
+                try
+                {
+                    SerializedProperty obj = m_Object.GetIterator();
+
+
+                    foreach (SerializedProperty property in obj)
+                    {
+                        Debug.Log(property.name + " : " + property.propertyType);
+                    }
+                }
+                catch (System.Exception e)
+                {
+
+                }
+
+            }
+            */
 
 
             //var info = typeof(component.GetType().GetFields()).GetProperties();
@@ -883,15 +1017,21 @@ public class save_and_load_GOs : MonoBehaviour
             }
             */
 
-            //List<PropertyInfo> properties = component.GetType().GetProperties();
-            foreach (PropertyInfo property in component.GetType().GetProperties())
+                //List<PropertyInfo> properties = component.GetType().GetProperties();
+                //foreach (PropertyInfo property in component.GetType().GetProperties())
+             foreach (var property in component.GetType().GetFields())
             {
-                //Debug.Log("property: " + property);
+                Debug.Log("property: " + property);
+                if (component.name == "UnityEngine.ParticleSystem")
+                {
+                    Debug.Log("property: " + property);
+                }
                 if (!property.IsDefined(typeof(ObsoleteAttribute), true))
                 {
 
                     if(property.Name != null)
-                    {
+                    {   
+                        /*
                         object propertyValue = property.GetValue(component, null);
                         //component.GetType().GetProperty(property) = propertyValue;
                         if (property.CanWrite && property.Name != null && propertyValue != null && property.CanRead)
@@ -901,6 +1041,7 @@ public class save_and_load_GOs : MonoBehaviour
                             own_property property_ = new own_property(property.Name.ToString(), propertyValue.ToString());
                             properties_.Add(property_);
                         }
+                        */
 
                     }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Runtime.Serialization;
 
 [ExecuteInEditMode()]
 public class FSM_naming_manager : MonoBehaviour

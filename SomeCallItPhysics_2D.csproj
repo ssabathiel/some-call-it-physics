@@ -278,6 +278,9 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="OdinSerializer">
+      <HintPath>Assets/Plugins/Sirenix/Odin Serializer/EditorOnly/OdinSerializer.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Silvester/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -299,6 +302,12 @@
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/Silvester/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="SomeCallItPhysics_2D.Plugins.csproj">
+      <Project>{00FAB6D4-A3B3-6444-C3B8-A02814C6D7D6}</Project>
+      <Name>SomeCallItPhysics_2D.Plugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3rd-Party\Campfire Pack\Script\SwitchView.cs" />
@@ -434,6 +443,10 @@
     <None Include="Assets\3rd-Party\TEXDraw\Script\Shaders\TEXShaderLit4Pass.shader" />
     <None Include="Assets\3rd-Party\TEXDraw\Script\Shaders\TEXShaderOverlay4Pass.shader" />
     <None Include="Assets\3rd-Party\VertexColorFarmAnimals\Shaders\VertexColorUnlit.shader" />
+    <None Include="Assets\Plugins\Sirenix\Odin Serializer\AOT\link.xml" />
+    <None Include="Assets\Plugins\Sirenix\Odin Serializer\EditorOnly\OdinSerializer.xml" />
+    <None Include="Assets\Plugins\Sirenix\Odin Serializer\License.txt" />
+    <None Include="Assets\Plugins\Sirenix\Odin Serializer\Version.txt" />
     <None Include="Assets\Scripts\test_state.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
