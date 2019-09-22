@@ -58,84 +58,18 @@ public class save_and_load_GOs : MonoBehaviour
 
     void Start()
     {
-        GameObject statess = GameObject.Find("test_object");
-        compy = statess.GetComponent<ParticleSystem>();
 
-
+        /*
         GameObject Protagonists = GameObject.Find("Protagonists");
         print("Protagonists[0].name: " + Protagonists.transform.GetChild(0).name);
         //var info = typeof(ParticleSystem).GetProperties();
         //var info2 = Protagonists.transform.GetChild(0).GetComponent(typeof(info[0]));
-        foreach (var component in Protagonists.transform.GetChild(0).GetComponents<Component>())
-        {
-            print("Component: " + component.GetType().ToString());
-            Type typy = component.GetType();
-            object compy = Protagonists.transform.GetChild(0).GetComponent(typy);
-            object compy2 = Protagonists.transform.GetChild(0).GetComponent("transform");
+        print("Start:");
+        GameObject sel_state = this.gameObject;
+        */
 
 
 
-            //var info = typeof(component.GetType().GetFields()).GetProperties();
-            //Type typy = component.GetType();
-            //var info = typeof(component).GetProperties();
-
-            //Debug.Log(component.GetType());
-            //print("Particle System Props: " + info[0]);
-
-            /*
-            foreach (FieldInfo fi in component.GetType().GetFields())
-            {
-                System.Object obj = (System.Object)component;
-                Debug.Log("fi name " + fi.Name + " val " + fi.GetValue(obj));
-            }
-            */
-
-            //List<PropertyInfo> properties = component.GetType().GetProperties();
-            foreach (PropertyInfo property in component.GetType().GetProperties())
-            {
-                    //Debug.Log("property: " + property);
-                    if (!property.IsDefined(typeof(ObsoleteAttribute), true))
-                    {
-                        object propertyValue = property.GetValue(component, null);
-                    //component.GetType().GetProperty(property) = propertyValue;
-                        /*
-                        if (property.CanWrite)
-                        {
-                            property.SetValue(compy, propertyValue);
-                        }
-                        */
-                        //Debug.Log("Property Value: " + propertyValue);
-                    }
-                        
-                //object theRealObject = property.GetValue(component);
-                //Debug.Log("")
-
-            }
-
-
-            // PROPERTY AND PROPERTY-VALUE AS STRING TO PROPERTY AND PROPERTY-VALUE
-            /*
-            Ship ship = new Ship();
-            string value = "5.5";
-            PropertyInfo propertyInfo = ship.GetType().GetProperty("Latitude");
-            propertyInfo.SetValue(ship, Convert.ChangeType(value, propertyInfo.PropertyType), null);
-            */
-
-
-
-            /*
-            PropertyInfo[] propertysProperties = theRealObject.GetType().GetProperties().Where(t => t.GetCustomAttributes<ListableAttribute>().Count() > 0);
-            foreach (PropertyInfo p in propertysProperties)
-            {
-                Debug.Log("VALUE: " + p.GetValue(theRealObject));
-
-
-
-            }
-            */
-
-        }
-        
     }
 
     void OnGUI()
@@ -213,9 +147,14 @@ public class save_and_load_GOs : MonoBehaviour
     ///////////////////////////////
     public void SaveCurrentScene2File(string path)
     {
+        string pathy = path + "_dir";
+        Directory.CreateDirectory(pathy);
+
         string json = CurrentScene2Json();
         System.IO.File.WriteAllText(path, json);
         Debug.Log("RenderSettings.skybox " + RenderSettings.skybox.name);
+
+
     }
 
     static string CurrentScene2Json()
@@ -481,18 +420,19 @@ public class save_and_load_GOs : MonoBehaviour
 
             }
 
+            
             if(IDinList == false)
             {
 
                 string prefab_path = "Prefabs/" + newObject.name;
                 GameObject prefab = (GameObject)Resources.Load(prefab_path);
-                //GameObject newObject1 = (GameObject)Instantiate(prefab);
+                GameObject newObject1 = (GameObject)Instantiate(prefab);
                 GameObject go = GameObject.Find("@state_scripts");
                 save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
-                go.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
+                //go.GetComponent<extra_go_params>().extra_Go_Params_Serilizable.initialize();
                 //myscript.StartCoroutine(myscript.moveToX(oldObject, newObject.position, 10.0f));
 
-                //own_GameObject2UnityGameObject(newObject, newObject1);
+                own_GameObject2UnityGameObject(newObject, newObject1);
 
                 PlayOwnAudio("blop");
                 myscript.StartCoroutine(myscript.BlobAppear(prefab));
@@ -501,7 +441,7 @@ public class save_and_load_GOs : MonoBehaviour
                 
 
             }
-
+            
             
 
 

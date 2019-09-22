@@ -8,8 +8,8 @@
                 "z": 1.0
             },
             "position": {
-                "x": 6.068816661834717,
-                "y": 9.467949867248536,
+                "x": 41.46881866455078,
+                "y": -7.532049655914307,
                 "z": 0.0
             },
             "rotation": {
@@ -422,14 +422,6 @@
                 },
                 {
                     "name": "UnityEngine.AudioSource",
-                    "properties": []
-                },
-                {
-                    "name": "UnityEngine.ParticleSystem",
-                    "properties": []
-                },
-                {
-                    "name": "UnityEngine.ParticleSystemRenderer",
                     "properties": []
                 }
             ],

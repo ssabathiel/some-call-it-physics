@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using System.IO;
 
 
 
@@ -38,6 +39,18 @@ public class FSM_naming_manager_Editor : Editor
             save_and_load_GOs myscript = (save_and_load_GOs)go.GetComponent(typeof(save_and_load_GOs));
             string pathy = @"C:\Users\Silvester\Documents\SomeCallItPhysics_2D\Assets\Scripts\States\" + next_state_string;
             myscript.SaveCurrentScene2File(pathy);
+
+
+
+        }
+
+        if (GUILayout.Button("Save scene as prefab"))
+        {
+            string path = "Assets/Resources/Prefabs/whole_scene.prefab";
+            GameObject sel_state = Selection.activeGameObject;
+
+            //GameObject prefab = PrefabUtility.CreatePrefab(path, sel_state);
+            //Directory.CreateDirectory("Assets/Resources/Prefabs/new_directory");
 
 
 
